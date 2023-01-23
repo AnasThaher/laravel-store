@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Dashoard;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('dashboard.categories.index',compact('categories'));
     }
 
     /**
@@ -24,7 +27,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('dashboard.categories.create');
+
     }
 
     /**
@@ -35,7 +40,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate($rules, [
+            'name.required' => ':attribute required!!',
+        ]);
+        $category = new Category([
+            'name' => $request->post('name'),
+            'slug' => Str::slug($request->post('name')),
+            'parent_id' => $request->post('parent_id'),
+            'description' => $request->post('description'),
+        ]);
+        $category->save();
+
+
+        // PRG: Post Redirect Get
+        return redirect()
+            ->route('dashboard.categories.index')
+            ->with('success', "Category ($category->name) created");
     }
 
     /**

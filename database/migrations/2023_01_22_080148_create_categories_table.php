@@ -20,7 +20,7 @@ class CreateCategoriesTable extends Migration
             ->constrained('categories', 'id')
             ->nullOnDelete()
             ->nullOnUpdate();
-            $name->string('name');
+            $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('image', 500)->nullable();

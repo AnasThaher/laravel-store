@@ -9,18 +9,17 @@
 
 @section('content')
 
-<x-flash-message class="info" />
 
 <div class="table-toolbar mb-3 d-flex justify-content-between">
     <div class="">
-        <form action="{{ route('dashboard.categories.index') }}" class="d-flex" method="get">
+        {{-- <form action="{{ route('dashboard.categories.index') }}" class="d-flex" method="get">
             <input type="text" name="search" value="{{ request('search') }}" class="form-control">
             <button type="submit" class="btn btn-dark ml-2">{{ trans('Search') }}</button>
-        </form>
+        </form> --}}
     </div>
     <div class="">
         <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-outline-primary">{{ __('Create') }}</a>
-        <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-success">{{ __('Trash') }}</a>
+        {{-- <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-success">{{ __('Trash') }}</a> --}}
     </div>
 </div>
 
@@ -68,3 +67,17 @@
 
 @endsection
 
+{{--
+
+ @extends('layout.dashboard')
+@section('title','Categories')
+
+@section('breadcrumb')
+    @parent
+    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+@endsection
+
+@section('content')
+
+
+@endsection --}}
