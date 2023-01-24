@@ -11,7 +11,7 @@ return [
         'title' => 'Categories',
         'icon' => 'fas fa-tags nav-icon',
         'route.active' => 'dashboard.categories.*',
-        'route' =>'',
+        'route' => fn() => route('dashboard.categories.index'),
     ],
     'products' => [
         'title' => 'Products',

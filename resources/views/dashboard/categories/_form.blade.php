@@ -1,5 +1,5 @@
 @csrf
-<div class="row">
+<div class="row p-3">
     <div class="col-md-8">
         <div class="form-group mb-3">
             <label for="name">{{ __('Name') }}</label>
@@ -35,7 +35,7 @@
             <div class="mb-2">
                 <img id="thumbnail" src="{{ $category->image_url }}" height="150">
             </div>
-            <input type="file" style="display: none;" id="image" name="image" class="form-control @error('image') is-invalid @enderror">
+            <input type="file"  id="image" name="image" class="form-control @error('image') is-invalid @enderror">
             @error('image')
             <p class="invalid-feedback">{{ $message }}</p>
             @enderror

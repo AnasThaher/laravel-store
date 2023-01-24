@@ -10,17 +10,18 @@
 @section('content')
 
 
-<div class="table-toolbar mb-3 d-flex justify-content-between">
-    <div class="">
-        {{-- <form action="{{ route('dashboard.categories.index') }}" class="d-flex" method="get">
-            <input type="text" name="search" value="{{ request('search') }}" class="form-control">
-            <button type="submit" class="btn btn-dark ml-2">{{ trans('Search') }}</button>
-        </form> --}}
-    </div>
+<div class="table-toolbar mb-3 d-flex justify-content-between p-3">
     <div class="">
         <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-outline-primary">{{ __('Create') }}</a>
         {{-- <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-success">{{ __('Trash') }}</a> --}}
     </div>
+    <div class="">
+        <form action="{{ route('dashboard.categories.index') }}" class="d-flex" method="get">
+            <input type="text" name="search" value="{{ request('search') }}" class="form-control">
+            <button type="submit" class="btn btn-dark ml-2">{{ trans('Search') }}</button>
+        </form>
+    </div>
+
 </div>
 
 <div class="table-responsive">
@@ -46,18 +47,18 @@
                 <td>{{ $category->parent_name ?? '' }}</td>
                 <td>{{ $category->created_at }}</td>
                 <td>
-                    @if (Auth::user()->can('categories.update'))
+                    {{-- @if (Auth::user()->can('categories.update')) --}}
                     <a href="{{ route('dashboard.categories.edit', [$category->id]) }}" class="btn btn-sm btn-outline-success">{{ __('Edit') }}</a>
-                    @endif
+                    {{-- @endif --}}
                 </td>
                 <td>
-                    @can('categories.delete')
+                    {{-- @can('categories.delete') --}}
                     <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="post">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-sm btn-outline-danger">{{ __('Delete') }}</button>
                     </form>
-                    @endcan
+                    {{-- @endcan --}}
                 </td>
             </tr>
             @endforeach
