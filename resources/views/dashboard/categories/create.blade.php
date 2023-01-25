@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <form action="{{route('dashboard.categories.store')}}" method="post" class="p-3">
+    <form action="{{route('dashboard.categories.store')}}" method="post" class="p-3" enctype="multipart/form-data">
 
         @include('dashboard.categories._form', [
             'button' => 'Save'

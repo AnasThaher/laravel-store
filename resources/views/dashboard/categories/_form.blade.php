@@ -33,7 +33,8 @@
         <div class="form-group mb-3">
             <label for="image">Thumbnail</label>
             <div class="mb-2">
-                <img id="thumbnail" src="{{ $category->image_url }}" height="150">
+                <img id="thumbnail" src="/storage/{{ $category->image }}" height="188" >
+                {{-- <img id="thumbnail" src="{{ $category->image_url }}" height="150"> --}}
             </div>
             <input type="file"  id="image" name="image" class="form-control @error('image') is-invalid @enderror">
             @error('image')
@@ -52,15 +53,10 @@
 
 @push('scripts')
 <script>
-document.getElementById('thumbnail').addEventListener('click', function(e) {
-    document.getElementById('image').click();
-});
-
 document.getElementById('image').addEventListener('change', function(e) {
     if (this.files && this.files[0]) {
         document.getElementById('thumbnail').src = URL.createObjectURL(this.files[0]);
     }
 });
-
 </script>
 @endpush

@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">{{ __('Categories') }}</li>
+    <li class="breadcrumb-item active"><a href="{{route('dashboard.categories.index')}}">{{ __('Categories') }}</a></li>
 @endsection
 
 @section('content')
@@ -28,10 +28,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th></th>
                 <th>{{ Lang::get('ID') }}</th>
                 <th>{{ trans('Name') }}</th>
                 <th>{{ __('Parent') }}</th>
+                <th>{{ trans('Image') }}</th>
                 <th>@lang('Created At')</th>
                 <th colspan="2">{{ __('app.actions') }}</th>
             </tr>
@@ -39,12 +39,11 @@
         <tbody>
             @foreach($categories as $category)
             <tr>
-                <td>
-                    <img src="{{ $category->image_url }}" height="60">
-                </td>
                 <td>{{ $category->id }}</td>
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->parent_name ?? '' }}</td>
+                <td>
+                    <img src="/storage/{{ $category->image }}" height="100">
                 <td>{{ $category->created_at }}</td>
                 <td>
                     {{-- @if (Auth::user()->can('categories.update')) --}}

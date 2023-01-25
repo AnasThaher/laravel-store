@@ -226,7 +226,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                   @section('breadcrumb')
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('dashboard.dashboard.index')}}">Home</a></li>
 
                     @show
             </ol>
@@ -249,14 +249,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+
 </div>
 <!-- ./wrapper -->
 
@@ -268,6 +261,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
-@stack('script')
+@stack('scripts')
 </body>
 </html>

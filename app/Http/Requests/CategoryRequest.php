@@ -28,7 +28,7 @@ class CategoryRequest extends FormRequest
             'name' => 'required|string|min:2|max:255|unique:categories,name,'.$id,
             'parent_id' => 'nullable|int|exists:categories,id',
             'description' => 'nullable|string|min:5',
-            'image' => 'nullable|mimes:png,jpg|'
+            'image' => 'nullable|image',//mimes:png,jpg|'
         ];
     }
 }
