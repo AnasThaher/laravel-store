@@ -13,13 +13,14 @@ use Illuminate\Http\UploadedFile;
 class CategoryController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         // SELECT categories.* parent.name  as parent_name from categories left join  categories as parent
         // on categories.parent_id '=' parent.id
-
+        $search = $request->query('search'); // ?search=apple
         $categories = Category::leftjoin('categories as parent','categories.parent_id','=','parent.id')
                 ->orderBy('name')
+                ->search($search)
                 ->get([
                         'categories.*',
                         'parent.name as parent_name'
@@ -113,10 +114,17 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        if($category->image) {
-            Storage::disk('public')->delete($category->image);
+        $category = Category::withTrashed()->findOrFail($id);
+        if($category->trashed()){
+            $category->forceDelete();
+            if($category->image) {
+                Storage::disk('public')->delete($category->image);
+            }
+            return redirect()
+            ->route('dashboard.categories.trash')
+            ->with('success', "Category ($category->name) deleted");
+        } else{
+            $category->delete();
         }
         return redirect()
         ->route('dashboard.categories.index')
@@ -143,5 +151,22 @@ class CategoryController extends Controller
                 'image' => 'File corrupted!',
             ]);
         }
+    }
+
+    public function trash()
+    {
+        $categories = Category::onlyTrashed()->latest('deleted_at')->get();
+        return view('dashboard.categories.trash', compact('categories'));
+    }
+
+    public function restore(Request $request, $id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->restore();
+
+        // PRG
+        return redirect()
+            ->route('dashboard.categories.index')
+            ->with('success', "Category ($category->name) restored");
     }
 }

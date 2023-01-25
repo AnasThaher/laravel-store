@@ -9,11 +9,16 @@
 
 @section('content')
 
+@if (Session::has('success'))
+    <div class="alert alert-success">
+        {{Session::get('success')}}
+    </div>
+@endif
 
 <div class="table-toolbar mb-3 d-flex justify-content-between p-3">
     <div class="">
         <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-outline-primary">{{ __('Create') }}</a>
-        {{-- <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-success">{{ __('Trash') }}</a> --}}
+        <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-success">{{ __('Trash') }}</a>
     </div>
     <div class="">
         <form action="{{ route('dashboard.categories.index') }}" class="d-flex" method="get">
@@ -24,7 +29,7 @@
 
 </div>
 
-<div class="table-responsive">
+<div class="table-responsive  p-3">
     <table class="table">
         <thead>
             <tr>
@@ -67,17 +72,12 @@
 
 @endsection
 
-{{--
-
- @extends('layout.dashboard')
-@section('title','Categories')
-
-@section('breadcrumb')
-    @parent
-    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-@endsection
-
-@section('content')
-
-
-@endsection --}}
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        window.setTimeout(function() {
+            $('.alert').alert('close')
+        }, 7000);
+    });
+</script>
+@endpush

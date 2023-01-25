@@ -44,7 +44,10 @@ Route::group([
     ],function () {
 
         Route::get('/',[CategoryController::class,'index'])
-            ->name('index');
+        ->name('index');
+
+        Route::get('/trash',[CategoryController::class,'trash'])
+            ->name('trash');
 
         Route::get('/create',[CategoryController::class,'create'])
             ->name('create');
@@ -53,7 +56,7 @@ Route::group([
             ->name('store');
 
         Route::get('/{id}/edit',[CategoryController::class,'edit'])
-                ->name('edit');
+            ->name('edit');
 
         Route::put('/{id}',[CategoryController::class,'update'])
             ->name('update');
@@ -61,8 +64,10 @@ Route::group([
         Route::delete('/{id}',[CategoryController::class,'destroy'])
             ->name('destroy');
 
-        // Route::get('dashboard/categories',[CategoryController::class,'index'])
-        //     ->name('trash');
+        Route::put('/{id}/restore',[CategoryController::class,'restore'])
+            ->name('restore');
+
+
     });
 
 });
