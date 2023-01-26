@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,8 @@ Route::group([
 
     Route::get('/',[DashboardController::class,'index'])
     ->name('dashboard.index');
+
+    Route::resource('/products', ProductsController::class);
 
     Route::group([
         // prefix in route
