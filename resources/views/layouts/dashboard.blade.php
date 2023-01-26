@@ -30,7 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <li class="nav-item d-none d-sm-inline-block">
         <a href="index3.html" class="nav-link">Home</a>
       </li>
-      
+
     </ul>
 
     <!-- Right navbar links -->
@@ -224,7 +224,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                   @section('breadcrumb')
-                        <li class="breadcrumb-item"><a href="{{route('dashboard.dashboard.index')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Home</a></li>
 
                     @show
             </ol>

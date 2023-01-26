@@ -33,10 +33,14 @@ Route::group([
 ],function () {
 
     Route::get('/',[DashboardController::class,'index'])
-    ->name('dashboard.index');
+    ->name('index');
+
+    Route::get('/products/trash', [ProductsController::class, 'trash'])
+        ->name('products.trash');
+    Route::patch('/products/{product}/restore', [ProductsController::class, 'restore'])
+        ->name('products.restore');
 
     Route::resource('/products', ProductsController::class);
-
     Route::group([
         // prefix in route
         'prefix' => '/categories',

@@ -5,7 +5,7 @@ return [
         'title' => 'Dashboard',
         'icon' => 'fas fa-tachometer-alt nav-icon',
         'route.active' => 'dashboard.index',
-        'route' => 'dashboard'
+        'route' => fn() => route('dashboard.index'),
     ],
     'categories' => [
         'title' => 'Categories',
@@ -16,8 +16,8 @@ return [
     'products' => [
         'title' => 'Products',
         'icon' => 'fas fa-box nav-icon',
-        'route.active' => '',
-        'route' => '',
+        'route.active' => 'dashboard.products.*',
+        'route' => fn() => route('dashboard.products.index'),
     ],
     'orders' => [
         'title' => 'Orders',
