@@ -9,11 +9,8 @@
 
 @section('content')
 
-@if (Session::has('success'))
-    <div class="alert alert-success">
-        {{Session::get('success')}}
-    </div>
-@endif
+<x-flash-message class="info" />
+
 
 <div class="table-toolbar mb-3 d-flex justify-content-between p-3">
     <div class="">
@@ -72,12 +69,3 @@
 
 @endsection
 
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        window.setTimeout(function() {
-            $('.alert').alert('close')
-        }, 7000);
-    });
-</script>
-@endpush
