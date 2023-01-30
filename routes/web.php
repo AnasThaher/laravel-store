@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ProductsController;
+use App\Http\Controllers\Auth\UserProfileController;
+use App\Http\Controllers\Auth\ChangeUserPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,7 @@ Route::get('/', function () {
 
 Route::get('dashboard',[DashboardController::class,'index'])
     ->name('dashboard.index');
+
 
 Route::group([
     // prefix in route
@@ -79,6 +82,12 @@ Route::group([
     });
 
 });
+
+Route::get('profile',[UserProfileController::class,'index'])->name('profile.index')->middleware(['auth:web,admin','password.confirm']);
+Route::patch('profile',[UserProfileController::class,'update'])->name('profile.update')->middleware(['auth:web,admin']);
+
+Route::get('change-password',[ChangeUserPasswordController::class,'index'])->name('change-password')->middleware(['auth:web,admin']);
+Route::put('change-password',[ChangeUserPasswordController::class,'update'])->name('change-password.update')->middleware(['auth:web,admin']);
 
 Route::get('/dashboard/breeze', function () {
     return view('dashboard');

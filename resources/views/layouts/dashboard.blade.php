@@ -15,6 +15,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+  <style>
+    .profile .items .dropdown-item{
+        text-align: center
+
+    }
+    .profile .dropdown-item img{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+}
+  </style>
   @stack('style')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -35,8 +46,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+
       <!-- Navbar Search -->
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
         </a>
@@ -116,6 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
+
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
@@ -141,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
-      </li>
+      </li> --}}
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -151,6 +164,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
+      </li>
+
+      <li>
+        <div class="dropdown profile">
+            <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ Auth::user()->name ?? '' }}            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="items">
+              <a class="dropdown-item image" href="{{route('profile.index')}}">
+                <img src="{{asset('dist/img/avatar5.png')}}" alt=""></a>
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit()">Logout</a>
+                        <form id="logout" method="POST" action="{{ route('logout') }}" style="display: none;">
+                            @csrf
+                        </form>
+            </div>
+            </div>
+          </div>
       </li>
     </ul>
   </nav>
