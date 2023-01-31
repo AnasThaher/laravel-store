@@ -1,339 +1,368 @@
-<!DOCTYPE html>
-<!--[if IE 7]><html class="ie ie7"><![endif]-->
-<!--[if IE 8]><html class="ie ie8"><![endif]-->
-<!--[if IE 9]><html class="ie ie9"><![endif]-->
+
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link href="apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="favicon.png" rel="icon">
-    <meta name="author" content="Nghia Minh Luong">
-    <meta name="keywords" content="Default Description">
-    <meta name="description" content="Default keyword">
-    <title>{{ $title? ($title . ' | ') : '' }}{{ config('app.name') }}</title>
-    <!-- Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:300,400,700%7CMontserrat:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/store/plugins/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/store/plugins/ps-icon/style.css') }}">
-    <!-- CSS Library-->
-    <link rel="stylesheet" href="{{ asset('assets/store/plugins/bootstrap/dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/store/plugins/owl-carousel/assets/owl.carousel.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/store/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/store/plugins/slick/slick/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/store/plugins/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/store/plugins/Magnific-Popup/dist/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/store/plugins/jquery-ui/jquery-ui.min.css') }}">
-    <!-- Custom-->
-    <link rel="stylesheet" href="{{ asset('assets/store/css/style.css?v=2') }}">
-    <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
-    <!--WARNING: Respond.js doesn't work if you view the page via file://-->
-    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
 
-    @stack('css')
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="{{asset('assets/store/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/store/css/animate.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/store/css/owl.carousel.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/store/css/owl.theme.default.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/store/css/jquery.fancybox.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/store/fonts/icomoon/style.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/store/fonts/flaticon/font/flaticon.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/store/css/aos.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/store/css/style.css')}}">
+<style>
+    .image img{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        background-color: none !important;
+
+    }
+    .user-icon a{
+        font-size: 20px;
+        color: #000000;
+        margin: 0px;
+        padding: 0px;
+        /* margin-right: 20px; */
+    }
+    .user-icon .dropdown-menu{
+        border: none;
+        border-radius: 0px;
+        background-color: #eee;
+    }
+    .logout-btn{
+        font-size: 1rem;
+        font-weight: 100;
+        border-top: 1px solid black;
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+    .login-btn1{
+        font-size: 1rem;
+        font-weight: 100;
+        border-bottom: 1px solid black;
+        padding-top: 1.1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+
+    }
+    .login-btn{
+        font-size: 1rem;
+        font-weight: 100;
+        padding-top: 1.1rem;
+        margin-top: 1rem;
+
+    }
+    .items{
+
+    }
+    .dropdown-item:hover{
+        background-color:#eee;
+    }
+    @media (max-width: 991.98px) {
+        .user-icon a{
+            margin-right: 3rem
+        }
+        .menu-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+     }
+    .user-icon .dropdown-menu{
+        text-align: center;
+    }
+    .user-profile .dropdown-menu img{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+
+}
+
+
+
+</style>
+  <title>{{config('app.name')}}</title>
 </head>
-<!--[if IE 7]><body class="ie7 lt-ie8 lt-ie9 lt-ie10"><![endif]-->
-<!--[if IE 8]><body class="ie8 lt-ie9 lt-ie10"><![endif]-->
-<!--[if IE 9]><body class="ie9 lt-ie10"><![endif]-->
 
-<body class="">
-    <div class="header--sidebar"></div>
-    <header class="header">
-        <div class="header__top">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6 col-md-8 col-sm-6 col-xs-12 ">
-                        <p>460 West 34th Street, 15th floor, New York - Hotline: 804-377-3580 - 804-399-3580</p>
-                    </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 ">
-                        <div class="header__actions">
-                            @auth
-                            <a href="{{ route('profile') }}">{{ Auth::user()->name }}</a>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit()">Logout</a>
-                            <form id="logout" action="{{ route('logout') }}" method="post" style="display: none;">
-                                @csrf
-                            </form>
-                            @else
-                            <a href="{{ route('login') }}">Login & Regiser</a>
-                            @endauth
-                            <div class="btn-group ps-dropdown">
-                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD<i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#"><img src="images/flag/usa.svg" alt=""> USD</a></li>
-                                    <li><a href="#"><img src="images/flag/singapore.svg" alt=""> SGD</a></li>
-                                    <li><a href="#"><img src="images/flag/japan.svg" alt=""> JPN</a></li>
-                                </ul>
-                            </div>
-                            <div class="btn-group ps-dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language<i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">Japanese</a></li>
-                                    <li><a href="#">Chinese</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<body>
+
+  <div class="search-form" id="search-form">
+    <form action="">
+      <input type="search" class="form-control" placeholder="Enter keyword to search...">
+      <button class="button">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+          <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+        </svg>
+      </button>
+      <button class="button">
+        <div class="close-search">
+          <span class="icofont-close js-close-search"></span>
         </div>
-        <nav class="navigation">
-            <div class="container-fluid">
-                <div class="navigation__column left">
-                    <div class="header__logo"><a class="ps-logo" href="index.html"><img src="images/logo.png" alt=""></a></div>
-                </div>
-                <div class="navigation__column center">
-                    <ul class="main-menu menu">
-                        <li class="menu-item menu-item-has-children dropdown"><a href="index.html">Home</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item"><a href="index.html">Homepage #1</a></li>
-                                <li class="menu-item"><a href="#">Homepage #2</a></li>
-                                <li class="menu-item"><a href="#">Homepage #3</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a>
-                            <div class="mega-menu">
-                                <div class="mega-wrap">
-                                    <div class="mega-column">
-                                        <ul class="mega-item mega-features">
-                                            <li><a href="product-listing.html">NEW RELEASES</a></li>
-                                            <li><a href="product-listing.html">FEATURES SHOES</a></li>
-                                            <li><a href="product-listing.html">BEST SELLERS</a></li>
-                                            <li><a href="product-listing.html">NOW TRENDING</a></li>
-                                            <li><a href="product-listing.html">SUMMER ESSENTIALS</a></li>
-                                            <li><a href="product-listing.html">MOTHER'S DAY COLLECTION</a></li>
-                                            <li><a href="product-listing.html">FAN GEAR</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="mega-column">
-                                        <h4 class="mega-heading">Shoes</h4>
-                                        <ul class="mega-item">
-                                            <li><a href="product-listing.html">All Shoes</a></li>
-                                            <li><a href="product-listing.html">Running</a></li>
-                                            <li><a href="product-listing.html">Training & Gym</a></li>
-                                            <li><a href="product-listing.html">Basketball</a></li>
-                                            <li><a href="product-listing.html">Football</a></li>
-                                            <li><a href="product-listing.html">Soccer</a></li>
-                                            <li><a href="product-listing.html">Baseball</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="mega-column">
-                                        <h4 class="mega-heading">CLOTHING</h4>
-                                        <ul class="mega-item">
-                                            <li><a href="product-listing.html">Compression & Nike Pro</a></li>
-                                            <li><a href="product-listing.html">Tops & T-Shirts</a></li>
-                                            <li><a href="product-listing.html">Polos</a></li>
-                                            <li><a href="product-listing.html">Hoodies & Sweatshirts</a></li>
-                                            <li><a href="product-listing.html">Jackets & Vests</a></li>
-                                            <li><a href="product-listing.html">Pants & Tights</a></li>
-                                            <li><a href="product-listing.html">Shorts</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="mega-column">
-                                        <h4 class="mega-heading">Accessories</h4>
-                                        <ul class="mega-item">
-                                            <li><a href="product-listing.html">Compression & Nike Pro</a></li>
-                                            <li><a href="product-listing.html">Tops & T-Shirts</a></li>
-                                            <li><a href="product-listing.html">Polos</a></li>
-                                            <li><a href="product-listing.html">Hoodies & Sweatshirts</a></li>
-                                            <li><a href="product-listing.html">Jackets & Vests</a></li>
-                                            <li><a href="product-listing.html">Pants & Tights</a></li>
-                                            <li><a href="product-listing.html">Shorts</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="mega-column">
-                                        <h4 class="mega-heading">BRAND</h4>
-                                        <ul class="mega-item">
-                                            <li><a href="product-listing.html">NIKE</a></li>
-                                            <li><a href="product-listing.html">Adidas</a></li>
-                                            <li><a href="product-listing.html">Dior</a></li>
-                                            <li><a href="product-listing.html">B&G</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="menu-item"><a href="#">Women</a></li>
-                        <li class="menu-item"><a href="#">Kids</a></li>
-                        <li class="menu-item menu-item-has-children dropdown"><a href="#">News</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item menu-item-has-children dropdown"><a href="blog-grid.html">Blog-grid</a>
-                                    <ul class="sub-menu">
-                                        <li class="menu-item"><a href="blog-grid.html">Blog Grid 1</a></li>
-                                        <li class="menu-item"><a href="blog-grid-2.html">Blog Grid 2</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item"><a href="blog-list.html">Blog List</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item menu-item-has-children dropdown"><a href="#">Contact</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item"><a href="contact-us.html">Contact Us #1</a></li>
-                                <li class="menu-item"><a href="contact-us.html">Contact Us #2</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="navigation__column right">
-                    <form class="ps-search--header" action="do_action" method="post">
-                        <input class="form-control" type="text" placeholder="Search Product…">
-                        <button><i class="ps-icon-search"></i></button>
-                    </form>
-                    <x-cart-menu />
-                    <div class="menu-toggle"><span></span></div>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="header-services">
-        <div class="ps-services owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="7000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="false" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on">
-            <p class="ps-service"><i class="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Sky Store</p>
-            <p class="ps-service"><i class="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Sky Store</p>
-            <p class="ps-service"><i class="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Sky Store</p>
-        </div>
+      </button>
+
+    </form>
+  </div>
+
+  <div class="site-mobile-menu">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close">
+        <span class="icofont-close js-menu-toggle"></span>
+      </div>
     </div>
-    <main class="ps-main">
+    <div class="site-mobile-menu-body"></div>
+  </div>
 
-        <x-flash-message />
 
+
+  <nav class="site-nav mb-5">
+    <div class="sticky-nav js-sticky-header">
+
+      <div class="container position-relative">
+        <div class="site-navigation text-center dark">
+          <a href="index.html" class="logo menu-absolute m-0">UntreeStore<span class="text-primary">.</span></a>
+
+          <ul class="js-clone-nav pl-0 d-none d-lg-inline-block site-menu">
+            <li class="active"><a href="shop.html">Home</a></li>
+            <li class="has-children">
+              <a href="shop.html">Shop</a>
+              <ul class="dropdown">
+                <li><a href="#">T-Shirt</a></li>
+                <li><a href="#">Underware</a></li>
+                <li><a href="#">Clothing</a></li>
+                <li><a href="#">Watches</a></li>
+                <li><a href="#">Shoes</a></li>
+              </ul>
+            </li>
+            <li class="has-children ">
+              <a href="#">Pages</a>
+              <ul class="dropdown">
+                <li><a href="elements.html">Elements</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="active"><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+
+                <li class="has-children">
+                  <a href="#">Menu Two</a>
+                  <ul class="dropdown">
+                    <li><a href="#">T-Shirt</a></li>
+                    <li><a href="#">Underware</a></li>
+                    <li><a href="#">Clothing</a></li>
+                    <li><a href="#">Watches</a></li>
+                    <li><a href="#">Shoes</a></li>
+
+                  </ul>
+                </li>
+                <li><a href="#">Menu Three</a></li>
+              </ul>
+            </li>
+
+            <li><a href="shop.html">Men</a></li>
+            <li><a href="shop.html">Women</a></li>
+
+          </ul>
+
+
+
+
+          <div class="menu-icons">
+
+                <a href="#" class="btn-custom-search" id="btn-search">
+                    <div class="user-icon">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                </svg>
+                </div>
+                </a>
+
+                <a href="cart.html" class="cart">
+                    <div class="user-icon">
+                <span class="item-in-cart">2</span>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                </svg>
+                </div>
+                </a>
+
+                <a href="#" class="user-profile ">
+                    @auth
+
+                    <div class="dropdown show user-icon ">
+                        <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{-- {{ Auth::user()->name ?? '' }} --}}
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="items">
+                        <a class="dropdown-item image" href="{{route('profile.index')}}">
+                            <img src="{{asset('dist/img/avatar5.png')}}" alt=""></a>
+                            <a class="dropdown-item " href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit()"><h5 class="logout-btn">Logout</h5></a>
+                                    <form id="logout" method="POST" action="{{ route('logout') }}" style="display: none;">
+                                        @csrf
+                                    </form>
+                        </div>
+                        </div>
+                    </div>
+                    @else
+                    <div class="dropdown show user-icon ">
+                        <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{-- {{ Auth::user()->name ?? '' }} --}}
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="items">
+                        <a class="dropdown-item " href="{{route('login')}}"><h5 class="login-btn1">Login</h5> </a>
+                        <a class="dropdown-item " href="{{route('register')}}"><h5 class="login-btn">register</h5> </a>
+
+                        </div>
+                        </div>
+                    </div>
+                    @endauth
+
+                    </a>
+
+          </div>
+
+          <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
+            <span></span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+  {{-- <div class="untree_co-section">
+    <div class="container">
         {{ $slot }}
+    </div>
+  </div> --}}
+  <div>
+      {{ $slot }}
+  </div>
 
-        <div class="ps-subscribe">
-            <div class="ps-container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
-                        <h3><i class="fa fa-envelope"></i>Sign up to Newsletter</h3>
-                    </div>
-                    <div class="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
-                        <form class="ps-subscribe__form" action="do_action" method="post">
-                            <input class="form-control" type="text" placeholder="">
-                            <button>Sign up now</button>
-                        </form>
-                    </div>
-                    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
-                        <p>...and receive <span>$20</span> coupon for first shopping.</p>
-                    </div>
-                </div>
-            </div>
+
+  <div class="site-footer">
+
+
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-lg-5">
+          <div class="widget mb-4">
+            <h3 class="mb-2">About UntreeStore</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate modi cumque rem recusandae quaerat at asperiores beatae saepe repudiandae quam rerum aspernatur dolores et ipsa obcaecati voluptates libero</p>
+          </div>
+          <div class="widget">
+            <h3>Join our mailing list and receive exclusives</h3>
+            <form action="#" class="subscribe">
+              <div class="d-flex">
+                <input type="email" class="form-control" placeholder="Email address">
+                <input type="submit" class="btn btn-black" value="Subscribe">
+              </div>
+            </form>
+
+
+          </div>
         </div>
-        <div class="ps-footer bg--cover" data-background="images/background/parallax.jpg">
-            <div class="ps-footer__content">
-                <div class="ps-container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
-                            <aside class="ps-widget--footer ps-widget--info">
-                                <header><a class="ps-logo" href="index.html"><img src="images/logo-white.png" alt=""></a>
-                                    <h3 class="ps-widget__title">Address Office 1</h3>
-                                </header>
-                                <footer>
-                                    <p><strong>460 West 34th Street, 15th floor, New York</strong></p>
-                                    <p>Email: <a href='mailto:support@store.com'>support@store.com</a></p>
-                                    <p>Phone: +323 32434 5334</p>
-                                    <p>Fax: ++323 32434 5333</p>
-                                </footer>
-                            </aside>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
-                            <aside class="ps-widget--footer ps-widget--info second">
-                                <header>
-                                    <h3 class="ps-widget__title">Address Office 2</h3>
-                                </header>
-                                <footer>
-                                    <p><strong>PO Box 16122 Collins Victoria 3000 Australia</strong></p>
-                                    <p>Email: <a href='mailto:support@store.com'>support@store.com</a></p>
-                                    <p>Phone: +323 32434 5334</p>
-                                    <p>Fax: ++323 32434 5333</p>
-                                </footer>
-                            </aside>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
-                            <aside class="ps-widget--footer ps-widget--link">
-                                <header>
-                                    <h3 class="ps-widget__title">Find Our store</h3>
-                                </header>
-                                <footer>
-                                    <ul class="ps-list--link">
-                                        <li><a href="#">Coupon Code</a></li>
-                                        <li><a href="#">SignUp For Email</a></li>
-                                        <li><a href="#">Site Feedback</a></li>
-                                        <li><a href="#">Careers</a></li>
-                                    </ul>
-                                </footer>
-                            </aside>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
-                            <aside class="ps-widget--footer ps-widget--link">
-                                <header>
-                                    <h3 class="ps-widget__title">Get Help</h3>
-                                </header>
-                                <footer>
-                                    <ul class="ps-list--line">
-                                        <li><a href="#">Order Status</a></li>
-                                        <li><a href="#">Shipping and Delivery</a></li>
-                                        <li><a href="#">Returns</a></li>
-                                        <li><a href="#">Payment Options</a></li>
-                                        <li><a href="#">Contact Us</a></li>
-                                    </ul>
-                                </footer>
-                            </aside>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
-                            <aside class="ps-widget--footer ps-widget--link">
-                                <header>
-                                    <h3 class="ps-widget__title">Products</h3>
-                                </header>
-                                <footer>
-                                    <ul class="ps-list--line">
-                                        <li><a href="#">Shoes</a></li>
-                                        <li><a href="#">Clothing</a></li>
-                                        <li><a href="#">Accessries</a></li>
-                                        <li><a href="#">Football Boots</a></li>
-                                    </ul>
-                                </footer>
-                            </aside>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="ps-footer__copyright">
-                <div class="ps-container">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                            <p>&copy; <a href="#">SKYTHEMES</a>, Inc. All rights Resevered. Design by <a href="#"> Alena Studio</a></p>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                            <ul class="ps-social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-2">
+          <div class="widget">
+            <h3>Help</h3>
+            <ul class="list-unstyled">
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Account</a></li>
+              <li><a href="#">Shipping</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </div>
         </div>
-    </main>
-    <!-- JS Library-->
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/jquery/dist/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/jquery-bar-rating/dist/jquery.barrating.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/owl-carousel/owl.carousel.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/gmap3.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/imagesloaded.pkgd.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/isotope.pkgd.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/jquery.matchHeight-min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/slick/slick/slick.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/elevatezoom/jquery.elevatezoom.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/Magnific-Popup/dist/jquery.magnific-popup.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/store/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-    <!-- Custom scripts-->
-    <script type="text/javascript" src="{{ asset('assets/store/js/main.js') }}"></script>
-    @stack('js')
+        <div class="col-lg-2">
+          <div class="widget">
+            <h3>About</h3>
+            <ul class="list-unstyled">
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Team</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="widget">
+            <h3>Shop</h3>
+            <ul class="list-unstyled">
+              <li><a href="#">Store</a></li>
+              <li><a href="#">Gift Cards</a></li>
+              <li><a href="#">Student Discount</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="row mt-5">
+        <div class="col-12 text-center">
+          <ul class="list-unstyled social">
+            <li><a href="#"><span class="icon-facebook"></span></a></li>
+            <li><a href="#"><span class="icon-instagram"></span></a></li>
+            <li><a href="#"><span class="icon-linkedin"></span></a></li>
+            <li><a href="#"><span class="icon-twitter"></span></a></li>
+          </ul>
+        </div>
+        <div class="col-12 text-center copyright">
+          <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> <!-- License information: https://untree.co/license/ -->
+          </p>
+
+        </div>
+      </div>
+    </div> <!-- /.container -->
+  </div> <!-- /.site-footer -->
+
+  <div id="overlayer"></div>
+  <div class="loader">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <script src="{{asset('assets/store/js/jquery-3.4.1.min.js')}}"></script>
+  <script src="{{asset('assets/store/js/popper.min.js')}}"></script>
+  <script src="{{asset('assets/store/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('assets/store/js/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('assets/store/js/jquery.animateNumber.min.js')}}"></script>
+  <script src="{{asset('assets/store/js/jquery.waypoints.min.js')}}"></script>
+  <script src="{{asset('assets/store/js/jquery.fancybox.min.js')}}"></script>
+  <script src="{{asset('assets/store/js/jquery.sticky.js')}}"></script>
+  <script src="{{asset('assets/store/js/aos.js')}}"></script>
+  <script src="{{asset('assets/store/js/custom.js')}}"></script>
+
 </body>
 
 </html>

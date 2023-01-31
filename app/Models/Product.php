@@ -34,4 +34,18 @@ class Product extends Model
         ];
     }
 
+    protected static function booted()
+    {
+
+        static::forceDeleted(function($product) {
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+        });
+
+        static::saving(function($product) {
+            $product->slug = Str::slug($product->name);
+        });
+    }
+
 }

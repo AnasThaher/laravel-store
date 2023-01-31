@@ -28,7 +28,8 @@ class ChangeUserPasswordController extends Controller
         ])->save();
 
         return redirect()
-            ->route('profile.index')
+            ->route('profile.index
+            ')
             ->with('success', 'Your password changed.');
     }
 }

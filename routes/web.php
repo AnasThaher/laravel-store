@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ProductsController;
 use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Auth\ChangeUserPasswordController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,7 @@ use App\Http\Controllers\Auth\ChangeUserPasswordController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class,'index'])->name('home');
 
 Route::get('dashboard',[DashboardController::class,'index'])
     ->name('dashboard.index');
