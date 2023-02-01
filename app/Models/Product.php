@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\softDeletes;
-
+use Illuminate\Support\Str;
+use App\Models\Category;
 class Product extends Model
 {
     use HasFactory;
@@ -15,6 +16,12 @@ class Product extends Model
         'name', 'slug', 'description', 'category_id', 'price', 'compare_price', 'cost',
         'quantity', 'availability', 'status', 'image', 'sku', 'barcode'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class);
+    }
 
     public static function availabilities()
     {
@@ -48,4 +55,27 @@ class Product extends Model
         });
     }
 
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return asset('images/mealfoodpng.png');
+        }
+        if (Str::startsWith($this->image, ['http://', 'https://'])) {
+            return $this->image;
+        }
+        return Storage::disk('public')->url($this->image);
+    }
+
+    public function getDiscountPercentAttribute()
+    {
+        if (!$this->compare_price) {
+            return 0;
+        }
+        return number_format(($this->compare_price - $this->price) / $this->compare_price * 100, 1);
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('products.show', [$this->category->slug, $this->slug]);
+    }
 }

@@ -52,7 +52,9 @@
                 <td>{{ $product->status }}</td>
 
                 <td>
-                    <img src="/storage/{{ $product->image }}" height="100">
+                    {{-- <img src="/storage/{{ $product->image }}" height="100"> --}}
+                    <img src="{{ $product->image_url }}" height="100">
+
                 <td>{{ $product->created_at }}</td>
                 <td>
                     {{-- @if (Auth::user()->can('categories.update')) --}}

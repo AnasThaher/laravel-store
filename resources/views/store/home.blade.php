@@ -66,7 +66,9 @@
 		<div class="container">
 
 			<div class="row">
-				<div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
+
+
+				{{-- <div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
 					<div class="product-item">
 						<a href="shop-single.html" class="product-img">
 
@@ -83,7 +85,40 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
+ --}}
+                @foreach ($newProduct as $product)
+                {{-- <div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
+					<div class="product-item">
+						<a href="shop-single.html" class="product-img">
+                            @if ($loop->first)
+							<div class="label new top-right ml-5">
+                                <div class='content'><span>New</span></div>
+							</div>
+                            @endif
+                            @if ($product->compare_price)
+
+							<div class="label sale top-right ">
+								<div class='content'>-{{ $product->discount_percent }}%</div>
+							</div>
+                            @endif
+
+                            <img src="{{ $product->image_url }}"class="img-fluid" >
+
+						</a>
+						<h3 class="title"><a href="#">{{$product->name}}</a></h3>
+						<div class="price">
+                            @if ($product->compare_price)
+							<del>${{$product->compare_price}}</del> &mdash;
+                            @endif
+
+                            <span>${{$product->price}}</span>
+						</div>
+					</div>
+				</div> --}}
+
+                <x-product-card :product='$product' :new='$loop->first'/>
+                @endforeach
+				{{-- <div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
 					<div class="product-item">
 						<a href="shop-single.html" class="product-img">
 							<div class="label new top-right">
@@ -100,8 +135,8 @@
 							<del>£99.00</del> &mdash; <span>£69.00</span>
 						</div>
 					</div>
-				</div>
-				<div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
+				</div> --}}
+				{{-- <div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
 					<div class="product-item">
 						<a href="shop-single.html" class="product-img">
 							<img src="{{asset('assets/store/images/products/shoe-1-min.jpg" alt="Image')}}" class="img-fluid">
@@ -159,7 +194,7 @@
 					</div>
 
 
-				</div>
+				</div> --}}
 			</div>
 		</div>
 	</div> <!-- /.untree_co-section -->
@@ -168,7 +203,7 @@
 	<div class="container">
 
 
-		<div class="deal-hero overlay" style="background-image: url('images/hero-slider-3-min.jpg')">
+		<div class="deal-hero overlay" style="background-image: url('{{asset('assets/store/images/hero-slider-3-min.jpg')}}')">
 			<div class="deal-contents">
 				<span class="subtitle">Limited Offers 20% OFF</span>
 				<h2 class="title mb-4"><a href="#">Summer Promo</a></h2>
@@ -203,7 +238,7 @@
 				</div>
 			</div> <!-- /.heading -->
 			<div class="owl-3-slider owl-carousel">
-				<div class="item">
+				{{-- <div class="item">
 					<div class="product-item">
 						<a href="shop-single.html" class="product-img">
 							<div class="label sale top-right">
@@ -216,29 +251,41 @@
 							<del>£99.00</del> &mdash; <span>£69.00</span>
 						</div>
 					</div>
-				</div> <!-- /.item -->
+				</div> <!-- /.item --> --}}
 
+                @foreach ($topSale as $top)
 
 				<div class="item">
 					<div class="product-item">
 						<a href="shop-single.html" class="product-img">
+                            @if ($loop->first)
+                            <div class="label new top-right ml-5">
+                                <div class='content'><span>New</span></div>
+                            </div>
+                            @endif
 
-							<div class="label new top-right">
-								<div class='content'>New</div>
+							<div class="label sale top-right ">
+								<div class='content'>-{{ $product->discount_percent }}%</div>
 							</div>
+                            <img src="{{ $product->image_url }}"class="img-fluid" >
 
-
-							<img src="{{asset('assets/store/images/products/jacket-1-min.jpg')}}" alt="Image" class="img-fluid">
+                            {{-- <img src="{{asset('assets/store/images/products/bottoms-1-min.jpg')}}" alt="Image" class="img-fluid"> --}}
 						</a>
-						<h3 class="title"><a href="#">Dark Jacket</a></h3>
+						<h3 class="title"><a href="#">{{$top->name}}</a></h3>
+						<p class="title"><a href="#">{{$top->category->name}}</a></ح>
 						<div class="price">
-							<span>£69.00</span>
+							<del>${{$top->compare_price}}</del> &mdash; <span>${{$top->price}}</span>
 						</div>
 					</div>
 				</div> <!-- /.item -->
 
 
-				<div class="item">
+                {{-- <x-product-card :product='$top' :new='$loop->first'/> --}}
+
+                @endforeach
+
+
+				{{-- <div class="item">
 					<div class="product-item">
 						<a href="shop-single.html" class="product-img">
 							<div class="label new top-right">
@@ -267,7 +314,7 @@
 							<span>£29.00</span>
 						</div>
 					</div>
-				</div> <!-- /.item -->
+				</div> <!-- /.item --> --}}
 
 			</div>
 		</div> <!-- /.container -->

@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\ProductsController;
 use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Auth\ChangeUserPasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController as StoreProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,14 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/products/{category:slug?}', [StoreProductsController::class, 'index'])
+    ->name('products');
+Route::get('/products/{category:slug}/{product:slug}', [StoreProductsController::class, 'show'])
+    ->name('products.show');
+
+Route::post('/products/{product}/reviews', [StoreProductsController::class, 'review'])
+    ->name('products.reviews.store');
 
 Route::get('/', [HomeController::class,'index'])->name('home');
 

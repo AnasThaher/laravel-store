@@ -130,8 +130,8 @@
         <div class="form-group mb-3">
             <label for="image">Thumbnail</label>
             <div class="mb-2">
-                <img id="thumbnail" src="/storage/{{ $product->image }}" height="188" >
-                {{-- <img id="thumbnail" src="{{ $category->image_url }}" height="150"> --}}
+                {{-- <img id="thumbnail" src="/storage/{{ $product->image }}" height="188" > --}}
+                <img id="thumbnail" src="{{ $category->image_url }}" height="150">
             </div>
             <input type="file"  id="image" name="image" class="form-control @error('image') is-invalid @enderror">
             @error('image')

@@ -45,7 +45,9 @@
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->parent_name ?? '' }}</td>
                 <td>
-                    <img src="/storage/{{ $category->image }}" height="100">
+                    {{-- <img src="/storage/{{ $category->image }}" height="100"> --}}
+                    <img src="{{ $category->image_url }}" height="100">
+
                 <td>{{ $category->created_at }}</td>
                 <td>
                     {{-- @if (Auth::user()->can('categories.update')) --}}
