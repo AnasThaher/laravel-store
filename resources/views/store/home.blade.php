@@ -87,114 +87,11 @@
 				</div>
  --}}
                 @foreach ($newProduct as $product)
-                {{-- <div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
-					<div class="product-item">
-						<a href="shop-single.html" class="product-img">
-                            @if ($loop->first)
-							<div class="label new top-right ml-5">
-                                <div class='content'><span>New</span></div>
-							</div>
-                            @endif
-                            @if ($product->compare_price)
 
-							<div class="label sale top-right ">
-								<div class='content'>-{{ $product->discount_percent }}%</div>
-							</div>
-                            @endif
-
-                            <img src="{{ $product->image_url }}"class="img-fluid" >
-
-						</a>
-						<h3 class="title"><a href="#">{{$product->name}}</a></h3>
-						<div class="price">
-                            @if ($product->compare_price)
-							<del>${{$product->compare_price}}</del> &mdash;
-                            @endif
-
-                            <span>${{$product->price}}</span>
-						</div>
-					</div>
-				</div> --}}
 
                 <x-product-card :product='$product' :new='$loop->first'/>
                 @endforeach
-				{{-- <div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
-					<div class="product-item">
-						<a href="shop-single.html" class="product-img">
-							<div class="label new top-right">
-								<div class='content'>New</div>
-							</div>
 
-							<div class="label sale top-right second">
-								<div class='content'>Sale</div>
-							</div>
-							<img src="{{asset('assets/store/images/products/bottoms-1-min.jpg" alt="Image')}}" class="img-fluid">
-						</a>
-						<h3 class="title"><a href="#">Chino Bottoms</a></h3>
-						<div class="price">
-							<del>£99.00</del> &mdash; <span>£69.00</span>
-						</div>
-					</div>
-				</div> --}}
-				{{-- <div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
-					<div class="product-item">
-						<a href="shop-single.html" class="product-img">
-							<img src="{{asset('assets/store/images/products/shoe-1-min.jpg" alt="Image')}}" class="img-fluid">
-						</a>
-						<h3 class="title"><a href="#">Brown Shoe</a></h3>
-						<div class="price">
-							<span>£29.00</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
-
-					<div class="product-item">
-						<a href="shop-single.html" class="product-img">
-							<img src="{{asset('assets/store/images/products/sock-1-min.jpg" alt="Image')}}" class="img-fluid">
-						</a>
-						<h3 class="title"><a href="#">The Modern Sock</a></h3>
-						<div class="price">
-							<span>£29.00</span>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
-
-					<div class="product-item">
-						<a href="shop-single.html" class="product-img">
-							<div class="label sale top-right">
-								<div class='content'>Sale</div>
-							</div>
-							<img src="{{asset('assets/store/images/products/sweater-2-min.jpg')}}" alt="Image" class="img-fluid">
-						</a>
-						<h3 class="title"><a href="#">Double Knit Sweater</a></h3>
-						<div class="price">
-							<del>£99.00</del> &mdash; <span>£69.00</span>
-						</div>
-					</div>
-
-
-				</div>
-				<div class="col-6 col-sm-6 col-md-6 mb-4 col-lg-4">
-
-					<div class="product-item">
-						<a href="shop-single.html" class="product-img">
-							<div class="label sale top-right">
-								<div class='content'>Sale</div>
-							</div>
-							<img src="{{asset('assets/store/images/products/watch-1-min.jpg')}}" alt="Image" class="img-fluid">
-						</a>
-						<h3 class="title"><a href="#">The Murray</a></h3>
-						<div class="price">
-							<del>£99.00</del> &mdash; <span>£69.00</span>
-						</div>
-					</div>
-
-
-				</div> --}}
 			</div>
 		</div>
 	</div> <!-- /.untree_co-section -->
@@ -257,22 +154,24 @@
 
 				<div class="item">
 					<div class="product-item">
-						<a href="shop-single.html" class="product-img">
+						<a href="{{route('products.show',[$product->category->slug,$product->slug])}}" class="product-img">
                             @if ($loop->first)
-                            <div class="label new top-right ml-5">
-                                <div class='content'><span>New</span></div>
-                            </div>
+
+                            <div class="ps-badge"><span>New</span></div>
                             @endif
 
-							<div class="label sale top-right ">
-								<div class='content'>-{{ $product->discount_percent }}%</div>
-							</div>
+
+                            @if ($product->compare_price)
+                            <div class="ps-badge ps-badge--sale @if($loop->first) ps-badge--2nd @endif"><span>-{{ $product->discount_percent }}%</span></div>
+                            @endif
+
+
                             <img src="{{ $product->image_url }}"class="img-fluid" >
 
                             {{-- <img src="{{asset('assets/store/images/products/bottoms-1-min.jpg')}}" alt="Image" class="img-fluid"> --}}
 						</a>
-						<h3 class="title"><a href="#">{{$top->name}}</a></h3>
-						<p class="title"><a href="#">{{$top->category->name}}</a></ح>
+						<h3 class="title"><a href="{{route('products.show',[$product->category->slug,$product->slug])}}">{{$top->name}}</a></h3>
+						<p class="title"><a href="{{route('products',$product->category->slug)}}">{{$top->category->name}}</a></ح>
 						<div class="price">
 							<del>${{$top->compare_price}}</del> &mdash; <span>${{$top->price}}</span>
 						</div>

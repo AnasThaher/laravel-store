@@ -15,17 +15,17 @@
                         <div class="ps-product__preview">
                             <div class="ps-product__variants">
                                 <div class="item"><img src="{{ $product->image_url }}" alt=""></div>
-                                @foreach ($product->getMedia('gallery') as $media)
+                                {{-- @foreach ($product->getMedia('gallery') as $media)
                                 <div class="item"><img src="{{ $media->getUrl() }}" alt=""></div>
-                                @endforeach
+                                @endforeach --}}
                             </div>
-                            <a class="popup-youtube ps-product__video" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><img src="{{ $product->image_url }}" alt=""><i class="fa fa-play"></i></a>
+                            {{-- <a class="popup-youtube ps-product__video" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><img src="{{ $product->image_url }}" alt=""><i class="fa fa-play"></i></a> --}}
                         </div>
                         <div class="ps-product__image">
                             <div class="item"><img class="zoom" src="{{ $product->image_url }}" alt="" data-zoom-image="{{ $product->image_url }}"></div>
-                            @foreach ($product->getMedia('gallery') as $media)
+                            {{-- @foreach ($product->getMedia('gallery') as $media)
                             <div class="item"><img class="zoom" src="{{ $media->getUrl() }}" data-zoom-image="{{ $media->getUrl() }}" alt=""></div>
-                            @endforeach
+                            @endforeach --}}
                         </div>
                     </div>
                     <div class="ps-product__thumbnail--mobile">
@@ -41,16 +41,16 @@
                         <p class="ps-product__category">
                             <a href="#">{{ $category->name }}</a>
                         </p>
-                        <h3 class="ps-product__price">{{ Money::format($product->price) }} 
+                        <h3 class="ps-product__price">{{ Money::format($product->price) }}
                             @if ($product->compare_price)
-                            <del>{{ Money::format($product->compare_price) }}</del>
+                            {{-- <del>{{ App\Helpers\Money::format($product->compare_price) }}</del> --}}
                             @endif
                         </h3>
-                        <div class="ps-product__block ps-product__quickview">
+                        <div class="ps-product__block ps-product__quickview mb-5">
                             <h4>QUICK REVIEW</h4>
                             <p>{{ Str::words($product->description, 60) }}</p>
                         </div>
-                        <div class="ps-product__block ps-product__style">
+                        {{-- <div class="ps-product__block ps-product__style">
                             <h4>CHOOSE YOUR STYLE</h4>
                             <ul>
                                 <li><a href="product-detail.html"><img src="images/shoe/sidebar/1.jpg" alt=""></a></li>
@@ -58,11 +58,11 @@
                                 <li><a href="product-detail.html"><img src="images/shoe/sidebar/3.jpg" alt=""></a></li>
                                 <li><a href="product-detail.html"><img src="images/shoe/sidebar/2.jpg" alt=""></a></li>
                             </ul>
-                        </div>
-                        <form action="{{ route('cart') }}" method="post">
+                        </div> --}}
+                        <form action="" method="post" class="mt-5">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <div class="ps-product__block ps-product__size">
+                            {{-- <div class="ps-product__block ps-product__size">
                                 <h4>CHOOSE SIZE<a href="#">Size chart</a></h4>
                                 <select class="ps-select selectpicker">
                                     <option value="1">Select Size</option>
@@ -79,13 +79,21 @@
                                     <option value="3">9.5</option>
                                     <option value="3">10</option>
                                 </select>
-                                <div class="form-group">
-                                    <input class="form-control" type="number" name="quantity" value="1">
-                                </div>
+
+                            </div> --}}
+                        <div class="ps-product__block ps-product__size quantity-details">
+                            {{-- <div class="form-group quantity-details">
+                                <p>quantity</p>
+                            </div> --}}
+                            <div class="form-group quantity-details">
+                                <label for="">Quantity</label>
+                                <input class="form-control" type="number" min="0" name="quantity" value="1">
                             </div>
+
+                        </div>
                             <div class="ps-product__shopping">
                                 <button type="submit" class="ps-btn mb-10" href="cart.html">Add to cart<i class="ps-icon-next"></i></button>
-                                <div class="ps-product__actions"><a class="mr-10" href="whishlist.html"><i class="ps-icon-heart"></i></a><a href="compare.html"><i class="ps-icon-share"></i></a></div>
+                                {{-- <div class="ps-product__actions"><a class="mr-10" href="whishlist.html"><i class="ps-icon-heart"></i></a><a href="compare.html"><i class="ps-icon-share"></i></a></div> --}}
                             </div>
                         </form>
                     </div>
@@ -103,8 +111,8 @@
                             <p>{{ $product->description }}</p>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab_02">
-                            <p class="mb-20">{{ $product->reviews()->count() }} review for <strong>{{ $product->name }}</strong></p>
-                            @foreach($product->reviews()->with('user')->latest()->get() as $review)
+                            {{-- <p class="mb-20">{{ $product->reviews()->count() }} review for <strong>{{ $product->name }}</strong></p> --}}
+                            {{-- @foreach($product->reviews()->with('user')->latest()->get() as $review)
                             <div class="ps-review">
                                 <div class="ps-review__thumbnail"><img src="images/user/1.jpg" alt=""></div>
                                 <div class="ps-review__content">
@@ -115,7 +123,7 @@
                                     <p>{{ $review->review }}</p>
                                 </div>
                             </div>
-                            @endforeach
+                            @endforeach --}}
                             <form class="ps-product__review" action="{{ route('products.reviews.store', $product->id) }}" method="post">
                                 @csrf
                                 <h4>ADD YOUR REVIEW</h4>

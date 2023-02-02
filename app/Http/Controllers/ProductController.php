@@ -15,9 +15,9 @@ class ProductController extends Controller
     {
         if (!$category) {
             $category = new Category;
-            $products = Product::with('category', 'media')->paginate(15);
+            $products = Product::with('category')->paginate(15);
         } else {
-            $products = $category->products()->with('category', 'media')->paginate();
+            $products = $category->products()->with('category')->paginate();
         }
 
         return view('store.products.index', [
