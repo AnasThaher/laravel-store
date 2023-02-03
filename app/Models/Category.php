@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\softDeletes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
+
 class Category extends Model
 {
     use HasFactory;

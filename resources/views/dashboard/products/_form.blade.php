@@ -138,6 +138,10 @@
             <p class="invalid-feedback">{{ $message }}</p>
             @enderror
         </div>
+        <div class="form-group mb-3">
+            <label for="tags">Tags</label>
+            <x-form.textarea name="tags" />
+        </div>
     </div>
 
     <div class="col-md-12">

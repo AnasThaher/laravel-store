@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\softDeletes;
 use Illuminate\Support\Str;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
+
 class Product extends Model
 {
     use HasFactory;
@@ -22,7 +24,18 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
         return $this->belongsTo(Category::class);
     }
-
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(
+            Tag::class,     // Related model
+            'product_tag',  // Pivot table name
+            'product_id',   // Current model FK in pivot table
+            'tag_id',       // Related model FK in pivot table
+            'id',           // Local (PK) current model
+            'id'            // Local (PK) related model
+        );
+    }
     public static function availabilities()
     {
         return [
