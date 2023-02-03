@@ -4,15 +4,15 @@
 
 @section('content')
 
-<x-flash-message />
+<x-flash-message  class="p-3"/>
 
-<div class="p-3">
+<div class="p-3  ">
     <p>
         <a href="{{ route('change-password') }}">Change Password</a>
+
     </p>
 </div>
-{{--
-<form action="{{ route('profile.update') }}" method="post">
+<form action="{{ route('profile.update') }}" method="post" class="p-3">
     @csrf
     @method('patch')
     <div class="row">
@@ -108,20 +108,6 @@
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
-</form> --}}
+</form>
 
-<form class="p-4" action="{{route('profile.update')}}" method="POST">
-    @csrf
-    @method('patch')
-    <div class="form-group">
-      <label for="exampleInputPassword1">Name</label>
-        <x-form.input  name="password" :value="$user->name"/>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <x-form.input  name="email" :value="$user->email"/>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-
-  @endsection
+@endsection

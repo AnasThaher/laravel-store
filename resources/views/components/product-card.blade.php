@@ -18,7 +18,7 @@
                 <div class='content'>-{{ $product->discount_percent }}%</div>
             </div> --}}
 
-            <div class="ps-badge ps-badge--sale @if($new) ps-badge--2nd @endif"><span>-{{ $product->discount_percent }}%</span></div>
+            <div class="ps-badge--sale label sale @if($new) ps-badge--2nd @endif"><span>-{{ $product->discount_percent }}%</span></div>
             @endif
 
             {{-- <img src="{{asset('assets/store/images/products/bottoms-1-min.jpg" alt="Image')}}" class="img-fluid"> --}}

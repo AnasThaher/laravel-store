@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\softDeletes;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
@@ -18,7 +19,12 @@ class Product extends Model
         'name', 'slug', 'description', 'category_id', 'price', 'compare_price', 'cost',
         'quantity', 'availability', 'status', 'image', 'sku', 'barcode'
     ];
-
+    public function scopeSearch(Builder $builder, $value)
+    {
+        if ($value) {
+            $builder->where('products.name', 'LIKE', "%{$value}%");
+        }
+    }
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');

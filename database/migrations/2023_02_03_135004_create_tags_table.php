@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductTagTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateProductTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_tag', function (Blueprint $table) {
-            $table->foreignId('product_id')->constrained('products')
-                ->cascadeOnDelete();
-            $table->foreignId('tag_id')->constrained('tags')
-                ->cascadeOnDelete();
-
-            $table->primary(['product_id', 'tag_id']);
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->timestamps();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateProductTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_tag');
+        Schema::dropIfExists('tags');
     }
 }

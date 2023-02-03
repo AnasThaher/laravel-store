@@ -20,10 +20,10 @@ class ProductsController extends Controller
         $this->middleware(['verified'])->except(['index','show']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-
-        $products = Product::all();
+        $search = $request->query('search'); // ?search=apple
+        $products = Product::search($search)->get();
 
         return view('dashboard.products.index', [
             'products' => $products,
