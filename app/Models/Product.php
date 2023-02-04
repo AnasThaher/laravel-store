@@ -42,6 +42,19 @@ class Product extends Model
             'id'            // Local (PK) related model
         );
     }
+
+    public function cartUsers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'carts',
+            'product_id',
+            'user_id',
+            'id',
+            'id'
+        );
+    }
+
     public static function availabilities()
     {
         return [

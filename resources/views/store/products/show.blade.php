@@ -43,7 +43,7 @@
                         </p>
                         <h3 class="ps-product__price">{{ Money::format($product->price) }}
                             @if ($product->compare_price)
-                            {{-- <del>{{ App\Helpers\Money::format($product->compare_price) }}</del> --}}
+                            <del>{{ App\Helpers\Money::format($product->compare_price) }}</del>
                             @endif
                         </h3>
                         <div class="ps-product__block ps-product__quickview mb-5">
@@ -59,42 +59,20 @@
                                 <li><a href="product-detail.html"><img src="images/shoe/sidebar/2.jpg" alt=""></a></li>
                             </ul>
                         </div> --}}
-                        <form action="" method="post" class="mt-5">
+                        <form action="{{route('cart')}}" method="post" class="mt-5">
                             @csrf
+                            @method('POST')
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            {{-- <div class="ps-product__block ps-product__size">
-                                <h4>CHOOSE SIZE<a href="#">Size chart</a></h4>
-                                <select class="ps-select selectpicker">
-                                    <option value="1">Select Size</option>
-                                    <option value="2">4</option>
-                                    <option value="3">4.5</option>
-                                    <option value="3">5</option>
-                                    <option value="3">6</option>
-                                    <option value="3">6.5</option>
-                                    <option value="3">7</option>
-                                    <option value="3">7.5</option>
-                                    <option value="3">8</option>
-                                    <option value="3">8.5</option>
-                                    <option value="3">9</option>
-                                    <option value="3">9.5</option>
-                                    <option value="3">10</option>
-                                </select>
-
-                            </div> --}}
-                        <div class="ps-product__block ps-product__size quantity-details">
-                            {{-- <div class="form-group quantity-details">
-                                <p>quantity</p>
-                            </div> --}}
-                            <div class="form-group quantity-details">
-                                <label for="">Quantity</label>
-                                <input class="form-control" type="number" min="0" name="quantity" value="1">
+                        <div class="ps-product__block ps-product__size quantity-details d-flex  ">
+                            <div class="form-group quantity-details w-50 ">
+                                <input class="form-control" type="number" min="1" name="quantity" value="1">
+                            </div>
+                            <div class="ps-product__shopping w-50">
+                                <button type="submit" class="add-cart-btn btn btn-black">Add to cart<i class="ps-icon-next"></i></button>
                             </div>
 
                         </div>
-                            <div class="ps-product__shopping">
-                                <button type="submit" class="ps-btn mb-10" href="cart.html">Add to cart<i class="ps-icon-next"></i></button>
-                                {{-- <div class="ps-product__actions"><a class="mr-10" href="whishlist.html"><i class="ps-icon-heart"></i></a><a href="compare.html"><i class="ps-icon-share"></i></a></div> --}}
-                            </div>
+
                         </form>
                     </div>
                     <div class="clearfix"></div>

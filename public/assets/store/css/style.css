@@ -8169,3 +8169,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
     background-color: #fff;
     border: 1px solid #aeaeae;
 }
+.add-cart-btn{
+    background-color: #29203c;
+    color: #e1e1e1;
+
+}

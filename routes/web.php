@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Auth\ChangeUserPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController as StoreProductsController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,12 @@ Route::get('/products/{category:slug}/{product:slug}', [StoreProductsController:
 
 Route::post('/products/{product}/reviews', [StoreProductsController::class, 'review'])
     ->name('products.reviews.store');
+
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart', [CartController::class, 'store']);
+Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
 
 Route::get('/', [HomeController::class,'index'])->name('home');
 
