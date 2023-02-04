@@ -7,7 +7,7 @@
             </div>
         </div>
     </div>
-    <div class="ps-product--detail pt-60">
+    <div class="ps-product--detail pt-60 mt-5">
         <div class="ps-container">
             <div class="row">
                 <div class="col-lg-10 col-md-12 col-lg-offset-1">

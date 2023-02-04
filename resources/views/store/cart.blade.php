@@ -4,11 +4,13 @@
           <div class="row align-items-end text-center">
             <div class="col-lg-7 mx-auto">
               <h1>Cart</h1>
-              <p class="mb-4"><a href="index.html">Home</a> / <strong>Cart</strong></p>
+              <p class="mb-4"><a href="{{ route('home') }}">Home</a> / <strong>Cart</strong></p>
             </div>
           </div>
         </div>
       </div>
+
+    @if (count($cart->all())>0)
 
 
 
@@ -174,5 +176,27 @@
           </div>
         </div>
       </div>
+      @else
 
+      <div class="untree_co-section">
+        <div class="container">
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row mb-12">
+
+                <div class="col-md-12">
+                    <h4 class="text-center m-5"> Your cart is empty</h4>
+                  <a href="{{ route('home') }}" class="btn btn-black btn-sm btn-block">Continue Shopping</a>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+        @endif
 </x-store-layout>

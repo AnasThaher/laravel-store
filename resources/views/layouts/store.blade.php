@@ -25,7 +25,8 @@
   <link rel="stylesheet" href="{{asset('assets/store/fonts/flaticon/font/flaticon.css')}}">
   <link rel="stylesheet" href="{{asset('assets/store/css/aos.css')}}">
   <link rel="stylesheet" href="{{asset('assets/store/css/style.css')}}">
-<style>
+  <title>{{ $title? ($title . ' | ') : '' }}{{ config('app.name') }}</title>
+  <style>
     .image img{
         width: 5rem;
         height: 5rem;
@@ -98,7 +99,6 @@
 
 
 </style>
-  <title>{{config('app.name')}}</title>
 </head>
 
 <body>

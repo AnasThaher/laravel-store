@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
-
+    
     // List of cart products (items)
     public function index(CartRepository $cart)
     {
