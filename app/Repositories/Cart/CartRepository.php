@@ -7,6 +7,7 @@ interface CartRepository
     public function all();
 
     public function add($item, $qty = 1);
+    public function remove1($item, $qty = 1);
 
     public function remove($id);
 

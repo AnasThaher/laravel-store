@@ -32,6 +32,7 @@ Route::post('/products/{product}/reviews', [StoreProductsController::class, 'rev
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart', [CartController::class, 'store']);
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 

@@ -40,4 +40,21 @@ class CartController extends Controller
         return redirect()->back()
             ->with('success', 'Item removed from the cart');
     }
+
+    public function update(Request $request, CartRepository $cart)
+{
+    $request->validate([
+        'product_id' => ['required', 'int', 'exists:products,id'],
+        'quantity' => ['int', 'min:1'],
+        'action' => ['required', 'in:add,remove'],
+    ]);
+
+    if ($request->post('action') === 'add') {
+        $cart->add($request->post('product_id'), $request->post('quantity'));
+    } else if ($request->post('action') === 'remove') {
+        $cart->remove1($request->post('product_id'), $request->post('quantity'));
+    }
+
+    return redirect()->back()->with('success', 'Cart updated successfully');
+}
 }

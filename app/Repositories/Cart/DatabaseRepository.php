@@ -60,6 +60,25 @@ class DatabaseRepository implements CartRepository
         }
     }
 
+    public function remove1($item, $qty = -1)
+    {
+        $cookie_id = $this->cookie_id;
+        $cart = $this->query()->where('product_id', '=', $item)->first();
+        if($cart->quantity <= 1){
+            return;
+        }
+        if (!$cart) {
+            Cart::create([
+                'id' => Str::uuid(),
+                'cookie_id' => $cookie_id,
+                'user_id' => Auth::id(),
+                'product_id' => $item,
+                'quantity' => $qty,
+            ]);
+        } else {
+            $cart->decrement('quantity', $qty);
+        }
+    }
     public function remove($id)
     {
         $this->query()->where('id', '=', $id)->delete();

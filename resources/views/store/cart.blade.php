@@ -15,7 +15,7 @@
       <div class="untree_co-section">
         <div class="container">
           <div class="row mb-5">
-            <form class="col-md-12" method="post">
+            {{-- <form class="col-md-12" method="post"> --}}
               <div class="site-blocks-table">
                 <table class="table table-bordered">
                   <thead>
@@ -29,7 +29,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    {{-- <tr>
                       <td class="product-thumbnail">
                         <img src="images/products/jacket-1-min.jpg" alt="Image" class="img-fluid">
                       </td>
@@ -51,48 +51,81 @@
                       </td>
                       <td>$49.00</td>
                       <td><a href="#" class="btn btn-black btn-sm">X</a></td>
-                    </tr>
+                    </tr> --}}
+                    @foreach($cart->all() as $item)
 
                     <tr>
                       <td class="product-thumbnail">
-                        <img src="images/products/bottoms-1-min.jpg" alt="Image" class="img-fluid">
+                        <img src="{{$item->product->image_url}}" alt="Image" class="img-fluid">
                       </td>
                       <td class="product-name">
-                        <h2 class="h5 text-black">Polo Shirt</h2>
+                        <a href="{{ $item->product->url }}">
+                        <h2 class="h5 text-black">{{$item->product->name}}</h2>
+                        </a>
                       </td>
-                      <td>$49.00</td>
+                      <td>{{ Money::format($item->product->price) }}</td>
                       <td>
-                        <div class="input-group mb-3" style="max-width: 120px;">
-                          <div class="input-group-prepend">
-                            <button class="btn btn-outline-black js-btn-minus" type="button">&minus;</button>
-                          </div>
-                          <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-black js-btn-plus" type="button">&plus;</button>
-                          </div>
+                        <div class="input-group mb-3 row" >
+                          {{-- <div class="input-group-prepend"> --}}
+                            {{-- <button class="btn btn-outline-black js-btn-minus" type="button">&minus;</button> --}}
+                            <form action="{{ route('cart.update') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $item->product->id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="action" value="remove">
+                                <div class="input-group-append h-100">
+                                <button type="submit" class="btn btn-outline-black">-</button>
+                                </div>
+                            </form>
+                        {{-- </div> --}}
+
+                          <input type="text" min="1" class="form-control text-center" value="{{ $item->quantity }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                          {{-- <div class="input-group-append"> --}}
+                            {{-- <button class="btn btn-outline-black js-btn-plus" type="button">&plus;</button> --}}
+                            <form action="{{ route('cart.update') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $item->product->id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="action" value="add">
+                                <div class="input-group-append h-100">
+                                <button type="submit" class="btn btn-outline-black ">+</button>
+                                </div>
+                            </form>
+                        {{-- </div> --}}
                         </div>
 
                       </td>
-                      <td>$49.00</td>
-                      <td><a href="#" class="btn btn-black btn-sm">X</a></td>
+                      <td>{{ Money::format($item->quantity * $item->product->price) }}</td>
+                      <td>
+
+                        {{-- <a href="#" class="btn btn-black btn-sm">X</a> --}}
+                        <form action="{{ route('cart.destroy', $item->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-black btn-sm">X</button>
+                        </form>
+                    </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
-            </form>
+            {{-- </form> --}}
           </div>
 
           <div class="row">
             <div class="col-md-6">
               <div class="row mb-5">
-                <div class="col-md-6 mb-3 mb-md-0">
-                  <button class="btn btn-black btn-sm btn-block">Update Cart</button>
-                </div>
+                {{-- <div class="col-md-6 mb-3 mb-md-0">
+                  <a href="{{route('cart.update')}}" class="btn btn-black btn-sm btn-block">Update Cart</a>
+
+                </div> --}}
                 <div class="col-md-6">
-                  <button class="btn btn-outline-black btn-sm btn-block">Continue Shopping</button>
+                  <a href="{{ route('home') }}" class="btn btn-outline-black btn-sm btn-block">Continue Shopping</a>
+
                 </div>
               </div>
-              <div class="row">
+              {{-- <div class="row">
                 <div class="col-md-12">
                   <label class="text-black h4" for="coupon">Coupon</label>
                   <p>Enter your coupon code if you have one.</p>
@@ -103,7 +136,7 @@
                 <div class="col-md-4">
                   <button class="btn btn-black">Apply Coupon</button>
                 </div>
-              </div>
+              </div> --}}
             </div>
             <div class="col-md-6 pl-5">
               <div class="row justify-content-end">
@@ -113,26 +146,26 @@
                       <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <div class="col-md-6">
+                  {{-- <div class="row mb-3"> --}}
+                    {{-- <div class="col-md-6">
                       <span class="text-black">Subtotal</span>
                     </div>
                     <div class="col-md-6 text-right">
                       <strong class="text-black">$230.00</strong>
-                    </div>
-                  </div>
+                    </div> --}}
+                  {{-- </div> --}}
                   <div class="row mb-5">
                     <div class="col-md-6">
                       <span class="text-black">Total</span>
                     </div>
                     <div class="col-md-6 text-right">
-                      <strong class="text-black">$230.00</strong>
+                      <strong class="text-black">{{ Money::format($cart->total()) }}</strong>
                     </div>
                   </div>
 
                   <div class="row">
-                    <div class="col-md-12">
-                      <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                    <div class="col-md-12 mr-5">
+                      <button class="btn btn-black btn-lg  btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
                     </div>
                   </div>
                 </div>
