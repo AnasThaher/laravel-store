@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\ChangeUserPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController as StoreProductsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,10 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart', [CartController::class, 'store']);
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'store']);
 
 
 Route::get('/', [HomeController::class,'index'])->name('home');
