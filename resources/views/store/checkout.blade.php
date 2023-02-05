@@ -5,7 +5,7 @@
       <div class="row align-items-end text-center">
         <div class="col-lg-7 mx-auto">
           <h1>Checkout</h1>
-          <p class="mb-4"><a href="index.html">Home</a> / <strong>Checkout</strong></p>
+          <p class="mb-4"><a href="{{route('home')}}">Home</a> / <strong>Checkout</strong></p>
         </div>
       </div>
     </div>
@@ -191,7 +191,7 @@
         </div>
         <div class="col-md-6">
 
-          <div class="row mb-5">
+          {{-- <div class="row mb-5">
             <div class="col-md-12">
               <h2 class="h3 mb-3 text-black">Coupon Code</h2>
               <div class="p-3 p-lg-5 border">
@@ -206,7 +206,7 @@
 
               </div>
             </div>
-          </div>
+          </div> --}}
 
           <div class="row mb-5">
             <div class="col-md-12">
@@ -218,21 +218,17 @@
                     <th>Total</th>
                   </thead>
                   <tbody>
+                    @foreach ($cart->all() as $item)
                     <tr>
-                      <td>Top Up T-Shirt <strong class="mx-2">x</strong> 1</td>
-                      <td>$250.00</td>
+                      <td>{{$item->product->name}} <strong class="mx-2">x</strong> {{ $item->quantity }}</td>
+                      <td>{{ Money::format($item->quantity * $item->product->price) }}</td>
                     </tr>
-                    <tr>
-                      <td>Polo Shirt <strong class="mx-2">x</strong>   1</td>
-                      <td>$100.00</td>
-                    </tr>
-                    <tr>
-                      <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                      <td class="text-black">$350.00</td>
-                    </tr>
+
+                    @endforeach
+
                     <tr>
                       <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                      <td class="text-black font-weight-bold"><strong>$350.00</strong></td>
+                      <td class="text-black font-weight-bold"><strong>{{ Money::format($cart->total()) }}</strong></td>
                     </tr>
                   </tbody>
                 </table>

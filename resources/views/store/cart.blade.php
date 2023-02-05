@@ -167,7 +167,7 @@
 
                   <div class="row">
                     <div class="col-md-12 mr-5">
-                      <button class="btn btn-black btn-lg  btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                      <a class="btn btn-black btn-lg  btn-block" href="{{route('checkout')}}">Proceed To Checkout</a>
                     </div>
                   </div>
                 </div>

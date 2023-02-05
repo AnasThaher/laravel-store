@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\Logout;
 use App\Listeners\UpdateCartUserId;
 use App\Listeners\UpdateUserLastLoginAt;
 use App\Listeners\DeleteCartCookieId;
+use App\Listeners\SendOrderCreatedEmailToAdmin;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,13 @@ class EventServiceProvider extends ServiceProvider
         ],
         Logout::class => [
             DeleteCartCookieId::class
+        ],
+        'order.created' => [
+            SendOrderCreatedEmailToAdmin::class,
+        ],
+        OrderCreated::class => [
+            // SendOrderCreatedNotification::class,
+            SendOrderCreatedEmailToAdmin::class,
         ],
     ];
 
