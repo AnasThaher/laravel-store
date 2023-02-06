@@ -12,7 +12,7 @@ class Order extends Model
     protected $fillable = [
         'number', 'user_id', 'status', 'payment_status',
         'discount', 'tax', 'total', 'ip', 'user_agent',
-        'payment_method', 'payment_transaction_id', 'payment_data'
+        'payment_method', 'payment_transaction_id', 'payment_data','order_notes'
     ];
     protected static function booted()
     {

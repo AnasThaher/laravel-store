@@ -35,8 +35,8 @@ class EventServiceProvider extends ServiceProvider
             SendOrderCreatedEmailToAdmin::class,
         ],
         OrderCreated::class => [
-            // SendOrderCreatedNotification::class,
-            SendOrderCreatedEmailToAdmin::class,
+            SendOrderCreatedNotification::class,
+            // SendOrderCreatedEmailToAdmin::class,
         ],
     ];
 

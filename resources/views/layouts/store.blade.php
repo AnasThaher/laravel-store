@@ -144,36 +144,32 @@
             <li class="has-children">
               <a href="{{route('products')}}">Shop</a>
               <ul class="dropdown">
-                <li><a href="#">T-Shirt</a></li>
+
                 <li><a href="#">Underware</a></li>
                 <li><a href="#">Clothing</a></li>
                 <li><a href="#">Watches</a></li>
                 <li><a href="#">Shoes</a></li>
               </ul>
             </li>
-            <li class="has-children ">
-              <a href="#">Pages</a>
-              <ul class="dropdown">
-                <li><a href="elements.html">Elements</a></li>
-                <li><a href="about.html">About</a></li>
-                <li class="active"><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html">Cart</a></li>
-                <li><a href="checkout.html">Checkout</a></li>
+            <li class="has-children active">
+                <a href="#">Categories</a>
+                <ul class="dropdown">
+                @foreach($categories as $category)
 
-                <li class="has-children">
-                  <a href="#">Menu Two</a>
-                  <ul class="dropdown">
-                    <li><a href="#">T-Shirt</a></li>
-                    <li><a href="#">Underware</a></li>
-                    <li><a href="#">Clothing</a></li>
-                    <li><a href="#">Watches</a></li>
-                    <li><a href="#">Shoes</a></li>
+                  <li class="@if($category['children']->count() > 0) has-children @endif">
+                    <a href="{{route('products',$category['slug'])}}">{{ $category['name'] }}</a>
+                    @if($category['children']->count() > 0)
+                    <ul class="dropdown">
+                        @foreach($category['children'] as $child)
+                      <li><a href="{{route('products',$child['slug'])}}">{{$child['name']}}</a></li>
+                        @endforeach
+                    </ul>
+                    @endif
+                  </li>
+                  @endforeach
+                </ul>
+              </li>
 
-                  </ul>
-                </li>
-                <li><a href="#">Menu Three</a></li>
-              </ul>
-            </li>
 
             <li><a href="shop.html">Men</a></li>
             <li><a href="shop.html">Women</a></li>

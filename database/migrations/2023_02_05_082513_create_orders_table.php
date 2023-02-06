@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->enum('status', ['pending', 'processing', 'shipped', 'received', 'cancelled', 'refunded']);
             $table->enum('payment_status', ['pending', 'paid', 'failed']);
             $table->string('payment_method')->nullable();
+            $table->text('order_notes')->nullable();
             $table->string('payment_transaction_id')->nullable();
             $table->json('payment_data')->nullable();
             $table->string('ip', 15);

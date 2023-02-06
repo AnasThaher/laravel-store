@@ -3,11 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\OrderCreated;
-use App\Repositories\Cart\CartRepository;
+use App\Models\User;
+use App\Notifications\OrderCreatedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendOrderCreatedEmailToAdmin
+class SendOrderCreatedNotification
 {
     /**
      * Create the event listener.
@@ -25,9 +26,11 @@ class SendOrderCreatedEmailToAdmin
      * @param  object  $event
      * @return void
      */
-    public function handle( $event)
+    public function handle(OrderCreated $event)
     {
-        // dd('email send');
+        $order = $event->order;
 
+        $user = User::find(1);
+        $user->notify(new OrderCreatedNotification($order));
     }
 }

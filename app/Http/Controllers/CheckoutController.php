@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Events\OrderCreated;
+use App\Models\User;
 use App\Repositories\Cart\CartRepository;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
@@ -26,8 +31,8 @@ class CheckoutController extends Controller
             'shipping.street' => ['required'],
             'shipping.city' => ['required'],
             'shipping.country_code' => ['required'],
+            'shipping.phone_number' => ['required'],
         ]);
-
         DB::beginTransaction();
         try {
             // 1: Create Order and Items
@@ -48,5 +53,50 @@ class CheckoutController extends Controller
         event( new OrderCreated($order) );
 
         return redirect()->route('payments.create', $order->id);
+    }
+
+    protected function storeOrder(Request $request, CartRepository $cart)
+    {
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'tax' => $request->post('tax', 0),
+            'order_notes' => $request->post('order_notes'),
+            'discount' => $request->post('discount', 0),
+            'total' => $cart->total(),
+            'status' => 'pending',
+            'payment_status' => 'pending',
+            'ip' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
+
+        $this->storeOrderItems($order, $cart);
+
+        return $order;
+    }
+
+    protected function storeAddresses(Order $order, Request $request)
+    {
+        $shipping_addr = $request->input('shipping');
+        $shipping_addr['type'] = 'shipping';
+        $order->addresses()->create($shipping_addr);
+
+        $billing_addr = $request->input('billing');
+        if (!$billing_addr) {
+            $billing_addr = $shipping_addr;
+        }
+        $billing_addr['type'] = 'billing';
+        $order->addresses()->create($billing_addr);
+    }
+
+    protected function storeOrderItems(Order $order, CartRepository $cart)
+    {
+        foreach ($cart->all() as $item) {
+            $order->items()->create([
+                'product_id' => $item->product_id,
+                'product_name' => $item->product->name,
+                'price' => $item->product->price,
+                'quantity' => $item->quantity,
+            ]);
+        }
     }
 }
