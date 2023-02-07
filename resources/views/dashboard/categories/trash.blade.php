@@ -1,29 +1,29 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Categories Trash')
+@section('title', __('Categories Trash'))
 
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active"><a href="{{route('dashboard.categories.index')}}">{{ __('Categories') }}</a></li>
-    <li class="breadcrumb-item active">Trash</li>
+    <li class="breadcrumb-item active">{{__('Trash')}}</li>
 
 @endsection
 
 @section('content')
 
 <div class="table-toolbar mb-3  p-3">
-    <a href="{{ route('dashboard.categories.index') }}" class="btn btn-sm btn-outline-success">Back</a>
+    <a href="{{ route('dashboard.categories.index') }}" class="btn btn-sm btn-outline-success">{{__('Back')}}</a>
 </div>
 
 <div class="table-responsive  p-3">
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Deleted At</th>
-                <th colspan="2">Actions</th>
+                <th>{{__('ID')}}</th>
+                <th>{{__('Name')}}</th>
+                <th>{{__('Image')}}</th>
+                <th>{{__('Deleted At')}}</th>
+                <th colspan="2">{{__('Actions')}}</th>
             </tr>
         </thead>
         <tbody>

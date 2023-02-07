@@ -57,6 +57,12 @@ class User extends Authenticatable implements MustVerifyEmail
             'id'
         );
     }
+
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'Notifications.' . $this->id;
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class, 'user_id', 'id')

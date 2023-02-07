@@ -8,7 +8,7 @@ window.Echo = new Echo({
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: true
 });
-
+ 
 window.Echo.private('Notifications.' + userId)
     .notification(function(message) {
         let c = Number($('#unread-count').text())
@@ -29,5 +29,5 @@ window.Echo.private('Notifications.' + userId)
             autohide: true,
             delay: 2000
           });
-    
+
     });

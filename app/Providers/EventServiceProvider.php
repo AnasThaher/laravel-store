@@ -12,6 +12,7 @@ use App\Listeners\UpdateCartUserId;
 use App\Listeners\UpdateUserLastLoginAt;
 use App\Listeners\DeleteCartCookieId;
 use App\Listeners\SendOrderCreatedEmailToAdmin;
+use App\Listeners\SendOrderCreatedNotification;
 
 class EventServiceProvider extends ServiceProvider
 {

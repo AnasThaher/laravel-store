@@ -21,7 +21,7 @@
             @enderror
         </div>
         <div class="form-group mb-3">
-            <label for="description">Description</label>
+            <label for="description">{{__('Description')}}</label>
             <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror">{{ old('description', $category->description) }}</textarea>
             @error('description')
             <p class="invalid-feedback">{{ $message }}</p>
@@ -45,8 +45,8 @@
 
     <div class="col-md-12">
         <div class="form-group mb-3">
-            <button type="submit" class="btn btn-primary">{{ $button }}</button>
-            <a href="{{ route('dashboard.categories.index') }}" class="btn btn-light">Cancel</a>
+            <button type="submit" class="btn btn-primary">{{ __($button) }}</button>
+            <a href="{{ route('dashboard.categories.index') }}" class="btn btn-light">{{__('Cancel')}}</a>
         </div>
     </div>
 </div>

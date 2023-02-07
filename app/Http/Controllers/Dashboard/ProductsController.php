@@ -17,7 +17,7 @@ class ProductsController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['verified'])->except(['index','show']);
+        // $this->middleware(['verified'])->except(['index','show']);
     }
 
     public function index(Request $request)

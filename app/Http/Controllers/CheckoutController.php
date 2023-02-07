@@ -31,8 +31,8 @@ class CheckoutController extends Controller
             'shipping.street' => ['required'],
             'shipping.city' => ['required'],
             'shipping.country_code' => ['required'],
-            'shipping.phone_number' => ['required'],
         ]);
+
         DB::beginTransaction();
         try {
             // 1: Create Order and Items
@@ -60,7 +60,6 @@ class CheckoutController extends Controller
         $order = Order::create([
             'user_id' => Auth::id(),
             'tax' => $request->post('tax', 0),
-            'order_notes' => $request->post('order_notes'),
             'discount' => $request->post('discount', 0),
             'total' => $cart->total(),
             'status' => 'pending',

@@ -52,7 +52,7 @@ class OrderCreatedNotification extends Notification
 
         $line1 = "{$billing->first_name} {$billing->last_name} has placed a new order (#{$order->number}) on your store";
         return (new MailMessage)
-                    ->from('anas@store.com', 'STORE Billing Account')
+                    ->from('invoices@gazaskygeeks.com', 'GSG Billing Account')
                     ->subject('New Order #' . $this->order->number)
                     ->greeting("Hi $notifiable->name,")
                     ->line($line1)
