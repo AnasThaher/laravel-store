@@ -1,7 +1,9 @@
+@php
+    $dir = LaravelLocalization::getCurrentLocale() == 'ar' ? 'rtl' : 'ltr';
+@endphp
 
 <!doctype html>
-<html lang="en">
-
+<html lang="{{ LaravelLocalization::getCurrentLocale() }}" dir="{{ $dir }}" >
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -96,7 +98,11 @@
 
 }
 
-
+.user-icon-btn{
+    font-size: 2rem;
+    /* background-color: red; */
+    padding-right: 2px;
+}
 
 </style>
 </head>
@@ -137,22 +143,22 @@
 
       <div class="container position-relative">
         <div class="site-navigation text-center dark">
-          <a href="index.html" class="logo menu-absolute m-0">UntreeStore<span class="text-primary">.</span></a>
+          <a href="index.html" class="logo menu-absolute m-0">Suii<span class="text-primary">.</span></a>
 
           <ul class="js-clone-nav pl-0 d-none d-lg-inline-block site-menu">
-            <li class="active"><a href="{{route('home')}}">Home</a></li>
-            <li class="has-children">
-              <a href="{{route('products')}}">Shop</a>
-              <ul class="dropdown">
+            <li class="active"><a href="{{route('home')}}">{{__('Home')}}</a></li>
+            <li>
+              <a href="{{route('products')}}">{{__('Shop')}}</a>
+              {{-- <ul class="dropdown">
 
                 <li><a href="#">Underware</a></li>
                 <li><a href="#">Clothing</a></li>
                 <li><a href="#">Watches</a></li>
                 <li><a href="#">Shoes</a></li>
-              </ul>
+              </ul> --}}
             </li>
-            <li class="has-children active">
-                <a href="#">Categories</a>
+            <li class="has-children ">
+                <a href="#">{{__('Categories')}}</a>
                 <ul class="dropdown">
                 @foreach($categories as $category)
 
@@ -171,19 +177,88 @@
               </li>
 
 
-            <li><a href="shop.html">Men</a></li>
-            <li><a href="shop.html">Women</a></li>
+            <li><a href="shop.html">{{__('About')}}</a></li>
+            <li><a href="shop.html">{{__('Contact')}}</a></li>
 
           </ul>
 
 
 
 
-          <div class="menu-icons">
+          <div class="menu-icons mr-5">
+              @auth
+              <ul class="js-clone-nav pl-0 d-none d-lg-inline-block site-menu ">
+                <li class="has-children user-icon">
+                    <a href="{{route('profile.index')}}"class=" show user-icon-btn">
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown">
+                      <li><a class="dropdown-item " href="{{route('profile.index')}}">
+                        <img src="{{asset('dist/img/avatar5.png')}}" alt=""></a></li>
+                      <li>
+                        <a class="dropdown-item " href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit()"><h5 class="logout-btn">{{__('Logout')}}</h5></a>
+                                    <form id="logout" method="POST" action="{{ route('logout') }}" style="display: none;">
+                                        @csrf
+                                    </form>
 
-                <a href="#" class="btn-custom-search" id="btn-search">
-                    <div class="user-icon">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <li class="has-children">
+                        <a href="#">{{__('Language')}}</a>
+                        <ul class="dropdown">
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <li>
+                                <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="dropdown-item">
+                                    {{ $properties['native'] }}
+                                </a>
+
+                            </li>
+                            @endforeach
+
+
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+
+                </ul>
+            @else
+
+            <ul class="js-clone-nav pl-0 d-none d-lg-inline-block site-menu">
+            <li class="has-children user-icon">
+                <a href="#" class=" show user-icon-btn">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    </svg>
+                </a>
+                <ul class="dropdown">
+                  <li><a href="{{route('login')}}">{{__('Log in')}}</a> </li>
+                  <li><a href="{{route('register')}}">{{__('Register')}}</a></li>
+
+                  <li class="has-children">
+                    <a href="#">{{__('Language')}}</a>
+                    <ul class="dropdown">
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li>
+                            <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="dropdown-item">
+                                {{ $properties['native'] }}
+                            </a>
+
+                        </li>
+                        @endforeach
+
+
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+            </ul>
+            @endauth
+
+            <a href="#" class="btn-custom-search" id="btn-search">
+                <div class="user-icon">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                     <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                 </svg>
@@ -193,50 +268,9 @@
                 <x-cart-menu />
 
 
-                <a href="#" class="user-profile ">
-                    @auth
-
-                    <div class="dropdown show user-icon ">
-                        <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{-- {{ Auth::user()->name ?? '' }} --}}
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                            </svg>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <div class="items">
-                        <a class="dropdown-item image" href="{{route('profile.index')}}">
-                            <img src="{{asset('dist/img/avatar5.png')}}" alt=""></a>
-                            <a class="dropdown-item " href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit()"><h5 class="logout-btn">Logout</h5></a>
-                                    <form id="logout" method="POST" action="{{ route('logout') }}" style="display: none;">
-                                        @csrf
-                                    </form>
-                        </div>
-                        </div>
                     </div>
-                    @else
-                    <div class="dropdown show user-icon ">
-                        <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{-- {{ Auth::user()->name ?? '' }} --}}
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                            </svg>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <div class="items">
-                        <a class="dropdown-item " href="{{route('login')}}"><h5 class="login-btn1">Login</h5> </a>
-                        <a class="dropdown-item " href="{{route('register')}}"><h5 class="login-btn">register</h5> </a>
 
-                        </div>
-                        </div>
-                    </div>
-                    @endauth
-
-                    </a>
-
-          </div>
-
-          <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
+                    <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
             <span></span>
           </a>
 

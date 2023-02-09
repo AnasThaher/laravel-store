@@ -3,6 +3,7 @@
     "Password": "كلمة المرور",
     "Remember me": "تذكرني",
     "Log in": "تسجيل الدخول",
+    "Register": "انشاء حساب  ",
     "Forgot your password?": "هل نسيت كلمة المرور؟",
     "Whoops! Something went wrong.": "اووبس! يوجد خطأ ما.",
     "Categories": "التصنيفات",
@@ -38,7 +39,10 @@
     "Update":"تحديث",
     "Save":"حفظ",
     "Language":"اللغة",
-    "Back":"رجوع"
+    "Back":"رجوع",
+    "Shop":"تسوق",
+    "About":"حول",
+    "Logout":"تسجيل الخروج"
 
 
 }

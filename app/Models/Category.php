@@ -16,6 +16,14 @@ class Category extends Model
     use softDeletes;
     protected $fillable = ['name', 'slug', 'parent_id', 'description', 'image'];
 
+    protected $hidden = [
+        'created_at', 'deleted_at', 'updated_at','image'
+    ];
+
+    protected $appends = [
+        'image_url', // getImageUrlAtrribute
+    ];
+
     public function products()
     {
         return $this->hasMany(Product::class, 'category_id', 'id');

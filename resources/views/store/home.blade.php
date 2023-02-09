@@ -1,5 +1,5 @@
 
-<x-store-layout title="Home ">
+<x-store-layout title="Home">
 
 
 	<div class="owl-carousel owl-single home-slider">
