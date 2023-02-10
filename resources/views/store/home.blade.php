@@ -1,8 +1,10 @@
-
+@php
+    $dir = LaravelLocalization::getCurrentLocale() == 'ar' ? 'rtl' : 'ltr';
+@endphp
 <x-store-layout title="Home">
 
 
-	<div class="owl-carousel owl-single home-slider">
+	<div class="owl-carousel owl-single home-slider" >
 		<div class="item">
 			<div class="untree_co-hero" style="background-image: url({{asset('assets/store/images/hero-slider-1-min.jpg')}});">
 				<div class="container">

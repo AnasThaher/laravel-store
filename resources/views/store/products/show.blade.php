@@ -1,4 +1,6 @@
 <x-store-layout :title="$product->name">
+
+
     <div class="test">
         <div class="container">
             <div class="row">

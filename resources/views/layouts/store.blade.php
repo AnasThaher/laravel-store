@@ -3,7 +3,7 @@
 @endphp
 
 <!doctype html>
-<html lang="{{ LaravelLocalization::getCurrentLocale() }}" dir="{{ $dir }}" >
+<html  >
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -138,7 +138,7 @@
 
 
 
-  <nav class="site-nav mb-5">
+  <nav class="site-nav mb-5" lang="{{ LaravelLocalization::getCurrentLocale() }}" dir="{{ $dir }}">
     <div class="sticky-nav js-sticky-header">
 
       <div class="container position-relative">
