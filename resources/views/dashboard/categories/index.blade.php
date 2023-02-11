@@ -50,18 +50,18 @@
 
                 <td>{{ $category->created_at }}</td>
                 <td>
-                    {{-- @if (Auth::user()->can('categories.update')) --}}
+                    @if (Auth::user()->can('categories.update'))
                     <a href="{{ route('dashboard.categories.edit', [$category->id]) }}" class="btn btn-sm btn-outline-success">{{ __('Edit') }}</a>
-                    {{-- @endif --}}
+                    @endif
                 </td>
                 <td>
-                    {{-- @can('categories.delete') --}}
+                    @can('categories.delete')
                     <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="post">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-sm btn-outline-danger">{{ __('Delete') }}</button>
                     </form>
-                    {{-- @endcan --}}
+                    @endcan
                 </td>
             </tr>
             @endforeach

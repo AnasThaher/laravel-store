@@ -9,9 +9,16 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:categories.view')->only('index');
+    }
+    
 
     public function index(Request $request)
     {
@@ -30,6 +37,10 @@ class CategoryController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('categories.create')) {
+            abort(403); // Foribden
+        }
+
         $parents  = Category::all();
         $category = new Category;
         return view('dashboard.categories.create',compact('parents','category'));
@@ -47,6 +58,10 @@ class CategoryController extends Controller
         //     'image' => 'nullable|mimes:png,jpg|'
 
         // ]);
+
+        if (!Gate::allows('categories.create')) {
+            abort(403); // Foribden
+        }
 
         $data = $request->except('image');
         if ($request->hasFile('image')) {
@@ -71,9 +86,10 @@ class CategoryController extends Controller
         //
     }
 
-
     public function edit($id)
     {
+        Gate::authorize('categories.update');
+
         $category = Category::findOrFail($id);
         // find or faile like belw code is null and abort
         // if($category == null){
@@ -91,6 +107,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         // validate in custom CategoryRequest
+        Gate::authorize('categories.update');
 
         $category = Category::findOrFail($id);
         $data = $request->except('image');
@@ -114,6 +131,9 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::check('categories.delete')) {
+            abort(403, __('You are not allowed to process action.'));
+        }
         $category = Category::withTrashed()->findOrFail($id);
         if($category->trashed()){
             $category->forceDelete();
