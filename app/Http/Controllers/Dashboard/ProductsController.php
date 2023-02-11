@@ -17,8 +17,21 @@ class ProductsController extends Controller
 
     public function __construct()
     {
-        // $this->middleware(['verified'])->except(['index','show']);
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('dashboard')) {
+                return redirect()->route('home');
+            }
+
+            return $next($request);
+        });
+
     }
+
+
+    // public function __construct()
+    // {
+    //     // $this->middleware(['verified'])->except(['index','show']);
+    // }
 
     public function index(Request $request)
     {
@@ -37,7 +50,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //Gate::authorize('products.create');
+        Gate::authorize('products.create');
         // $this->authorize('create', Product::class);
 
         return view('dashboard.products.create', [
@@ -55,7 +68,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //Gate::authorize('products.create');
+        Gate::authorize('products.create');
         // $this->authorize('create', Product::class);
 
         $rules = $this->rules();
@@ -97,7 +110,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //Gate::authorize('products.update');
+        Gate::authorize('products.update');
 
         $product = Product::findOrFail($id);
 
@@ -118,7 +131,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Gate::authorize('products.update');
+        Gate::authorize('products.update');
 
         $product = Product::findOrFail($id);
 

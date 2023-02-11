@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RolesController extends Controller
 {
@@ -13,8 +14,22 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('dashboard')) {
+                return redirect()->route('home');
+            }
+
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
+        Gate::authorize('roles.view');
+
         $roles = Role::withCount('users')->paginate();
 
         return view('dashboard.roles.index', [
@@ -29,6 +44,8 @@ class RolesController extends Controller
      */
     public function create()
     {
+        Gate::authorize('roles.create');
+
         return view('dashboard.roles.create', [
             'role' => new Role,
         ]);
@@ -42,6 +59,8 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('roles.create');
+
         $request->validate([
             'name' => 'required',
             'permissions' => 'required|array',
@@ -75,6 +94,8 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
+        Gate::authorize('roles.update');
+
         return view('dashboard.roles.edit', [
             'role' => $role,
         ]);
@@ -89,6 +110,8 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        // Gate::authorize('roles.update');
+
         $request->validate([
             'name' => 'required',
             'permissions' => 'array',
@@ -114,6 +137,8 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
+        Gate::authorize('roles.delete');
+
         $role->delete();
         return redirect()
             ->route('dashboard.roles.index')

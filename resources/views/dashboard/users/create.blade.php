@@ -10,7 +10,7 @@
 
 @section('content')
 
-<form action="{{ route('dashboard.users.store') }}" method="post">
+<form action="{{ route('dashboard.users.store') }}" method="post" class="p-3">
     @include('dashboard.users._form', [
         'button' => 'Create'
     ])

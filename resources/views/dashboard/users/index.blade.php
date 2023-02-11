@@ -4,22 +4,22 @@
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">{{ __('Users') }}</li>
+    <li class="breadcrumb-item active"><a href="{{route('dashboard.users.index')}}">{{ __('Users') }}</a></li>
 @endsection
 
 @section('content')
 
 <x-flash-message class="info" />
 
-<div class="table-toolbar mb-3 d-flex justify-content-between">
+<div class="table-toolbar mb-3 d-flex justify-content-between p-3">
+    <div class="">
+        <a href="{{ route('dashboard.users.create') }}" class="btn btn-sm btn-outline-primary">{{ __('Create') }}</a>
+    </div>
     <div class="">
         <form action="{{ route('dashboard.users.index') }}" class="d-flex" method="get">
             <input type="text" name="search" value="{{ request('search') }}" class="form-control">
             <button type="submit" class="btn btn-dark ml-2">{{ trans('Search') }}</button>
         </form>
-    </div>
-    <div class="">
-        <a href="{{ route('dashboard.users.create') }}" class="btn btn-sm btn-outline-primary">{{ __('Create') }}</a>
     </div>
 </div>
 

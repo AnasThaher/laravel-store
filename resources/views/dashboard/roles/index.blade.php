@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">{{ __('Roles') }}</li>
+    <li class="breadcrumb-item active"><a href="{{route('dashboard.roles.index')}}">{{ __('Roles') }}</a></li>
 @endsection
 
 @section('content')

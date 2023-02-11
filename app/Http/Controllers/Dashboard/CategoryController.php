@@ -14,16 +14,37 @@ use Illuminate\Support\Facades\Gate;
 class CategoryController extends Controller
 {
 
+
     public function __construct()
     {
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('dashboard')) {
+                return redirect()->route('home');
+            }
+
+            return $next($request);
+        });
+        
         $this->middleware('can:categories.view')->only('index');
+
     }
-    
+
+    // public function __construct()
+    // {
+
+
+
+    //     $this->middleware('can:categories.view')->only('index');
+
+    // }
+
 
     public function index(Request $request)
     {
         // SELECT categories.* parent.name  as parent_name from categories left join  categories as parent
         // on categories.parent_id '=' parent.id
+
+
         $search = $request->query('search'); // ?search=apple
         $categories = Category::leftjoin('categories as parent','categories.parent_id','=','parent.id')
                 ->orderBy('name')
@@ -37,6 +58,7 @@ class CategoryController extends Controller
 
     public function create()
     {
+
         if (!Gate::allows('categories.create')) {
             abort(403); // Foribden
         }

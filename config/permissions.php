@@ -2,6 +2,8 @@
 
 return [
 
+    'dashboard' => 'View dashboard',
+
     'categories.view' => 'View categories',
     'categories.create' => 'Create new category',
     'categories.update' => 'Update category',

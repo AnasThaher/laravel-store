@@ -5,22 +5,34 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
 
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(User::class, 'user');
+    // }
+
+
     public function __construct()
     {
-        $this->authorizeResource(User::class, 'user');
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('dashboard')) {
+                return redirect()->route('home');
+            }
+
+            return $next($request);
+        });
+
+
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        Gate::authorize('users.view');
+
         $users = User::with('roles')->paginate();
         return view('dashboard.users.index', [
             'users' => $users,
@@ -34,6 +46,8 @@ class UsersController extends Controller
      */
     public function create()
     {
+        Gate::authorize('users.create');
+
         return view('dashboard.users.create', [
             'user' => new User,
             'user_roles' => [],
@@ -48,6 +62,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('users.create');
+
         $request->validate([
             'name' => 'required',
             'roles' => 'required|array',
@@ -87,6 +103,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        Gate::authorize('users.update');
+
         $user_roles = $user->roles()->pluck('id')->toArray();
 
         return view('dashboard.users.edit', [
@@ -104,9 +122,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        Gate::authorize('users.update');
+
         $request->validate([
             'name' => 'required',
-            'roles' => 'required|array',
+            'roles' => 'array',
         ]);
 
         $user->update($request->all());
@@ -130,6 +150,8 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
+        Gate::authorize('users.delete');
+
         $user->delete();
         return redirect()
             ->route('dashboard.users.index')

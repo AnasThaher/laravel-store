@@ -34,15 +34,11 @@ class AuthServiceProvider extends ServiceProvider
         //     }
         // });
 
-        // foreach (config('permissions') as $key => $value) {
-        //     Gate::define($key, function($user) use ($key) {
-        //         return $user->hasPermission($key);
-        //     });
-        // }
         foreach (config('permissions') as $key => $value) {
             Gate::define($key, function($user) use ($key) {
-                return true;
+                return $user->hasPermission($key);
             });
         }
+       
     }
 }

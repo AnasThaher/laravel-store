@@ -10,7 +10,7 @@
 
 @section('content')
 
-<form action="{{ route('dashboard.users.update', $user->id) }}" method="post">
+<form action="{{ route('dashboard.users.update', $user->id) }}" method="post" class="p-3">
     @method('put')
 
     @include('dashboard.users._form', [
