@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ProductsController;
+use App\Http\Controllers\Dashboard\UsersController;
+use App\Http\Controllers\Dashboard\RolesController;
 use App\Http\Controllers\Auth\UserProfileController;
 use App\Http\Controllers\Auth\ChangeUserPasswordController;
 use App\Http\Controllers\HomeController;
@@ -67,6 +69,13 @@ Route::group([
         ->name('products.trash');
     Route::patch('/products/{product}/restore', [ProductsController::class, 'restore'])
         ->name('products.restore');
+
+
+    Route::resources([
+        'roles' => RolesController::class,
+        'users' => UsersController::class,
+    ]);
+
 
     Route::resource('/products', ProductsController::class);
     Route::group([
