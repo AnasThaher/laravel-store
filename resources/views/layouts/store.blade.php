@@ -104,10 +104,14 @@
     padding-right: 2px;
 }
 
+.hedin{
+    overflow-x: hidden;
+
+}
 </style>
 </head>
 
-<body>
+<body class="hedin">
 
   <div class="search-form" id="search-form">
     <form action="">
@@ -149,13 +153,7 @@
             <li class="active"><a href="{{route('home')}}">{{__('Home')}}</a></li>
             <li>
               <a href="{{route('products')}}">{{__('Shop')}}</a>
-              {{-- <ul class="dropdown">
 
-                <li><a href="#">Underware</a></li>
-                <li><a href="#">Clothing</a></li>
-                <li><a href="#">Watches</a></li>
-                <li><a href="#">Shoes</a></li>
-              </ul> --}}
             </li>
             <li class="has-children ">
                 <a href="#">{{__('Categories')}}</a>

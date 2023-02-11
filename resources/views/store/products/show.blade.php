@@ -1,7 +1,87 @@
 <x-store-layout :title="$product->name">
 
 
-    <div class="test">
+    <style>
+
+        .stars{
+            z-index: 999;
+        }
+
+         .mt-200{
+             margin-top:200px;
+         }
+
+        input.star2 {
+            display: none;
+
+
+        }
+
+
+
+        label.star2 {
+
+          float: right;
+
+          padding: 6px;
+          font-size: 27px;
+
+          color: #bbbbbb;
+
+          transition: all .2s;
+
+        }
+
+
+
+        input.star2:checked ~ label.star2:before {
+
+          content: '\f005';
+
+          color: #FD4;
+
+          transition: all .25s;
+
+        }
+
+
+        input.star-five:checked ~ label.star2:before {
+
+          color: #FE7;
+
+          text-shadow: 0 0 20px #952;
+
+        }
+
+
+
+        input.star-one:checked ~ label.star2:before { color: #F62; }
+
+
+
+        label.star2:hover { transform: rotate(-15deg) scale(1.3); }
+
+
+
+        label.star2:before {
+
+          content: '\f006';
+
+          font-family: FontAwesome;
+
+        }
+          </style>
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"five --}}
+
+
+
+    <div class="test hedin">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
@@ -9,13 +89,13 @@
             </div>
         </div>
     </div>
-    <div class="ps-product--detail pt-60 mt-5">
+    <div class="ps-product--detail pt-60 mt-5 hedin">
         <div class="ps-container">
             <div class="row">
                 <div class="col-lg-10 col-md-12 col-lg-offset-1">
                     <div class="ps-product__thumbnail">
                         <div class="ps-product__preview">
-                            <div class="ps-product__variants">
+                            <div class="ps-product__variants overflow-hidden">
                                 <div class="item"><img src="{{ $product->image_url }}" alt=""></div>
                                 {{-- @foreach ($product->getMedia('gallery') as $media)
                                 <div class="item"><img src="{{ $media->getUrl() }}" alt=""></div>
@@ -37,7 +117,7 @@
                     <div class="ps-product__info">
                         <div class="ps-product__rating">
                             <x-rating-stars :rating="$product->rating" />
-                            <a href="#">(Read all {{ $product->total_reviews }} reviews)</a>
+                            {{-- <a href="#">(Read all {{ $product->total_reviews }} reviews)</a> --}}
                         </div>
                         <h1>{{ $product->name }}</h1>
                         <p class="ps-product__category">
@@ -77,7 +157,152 @@
 
                         </form>
                     </div>
-                    <div class="clearfix"></div>
+
+
+                   <div class="clearfix"></div>
+
+                    <div class="ps-product__content mt-50">
+                        <ul class="tab-list" role="tablist">
+                            <li class="nav-item">
+                                {{-- <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                                  aria-selected="true">Home</a> --}}
+                              </li>
+                              <li class="nav-item">
+                                {{-- <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                                  aria-selected="false">Profile</a> --}}
+                              </li>
+                              <li class="nav-item">
+                                {{-- <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                                  aria-selected="false">Contact</a> --}}
+                              </li>
+                        </ul>
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                                aria-selected="true">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                                aria-selected="false">Review</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                                aria-selected="false">PRODUCT TAG</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="addetinal-tab" data-toggle="tab" href="#addetinal" role="tab" aria-controls="contact"
+                                aria-selected="false">ADDITIONAL</a>
+                            </li>
+                          </ul>
+                          <div class="tab-content m-2" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="tab-pane active" role="tabpanel" id="tab_01">
+                                    <p>{{ $product->description }}</p>
+
+                                    <div>
+                                        <p class="mb-20">{{ $product->reviews()->count() }} review for <strong>{{ $product->name }}</strong></p>
+                                        @foreach($product->reviews()->with('user')->latest()->get() as $review)
+                                        <div class="ps-review">
+                                            <div class="ps-review__thumbnail"><img src="images/user/1.jpg" alt=""></div>
+                                            <div class="ps-review__content">
+                                                <header>
+                                                    <x-rating-stars :rating="$review->rating" />
+                                                    <p>By<a href=""> {{ $review->user->name }}</a> - {{ $review->created_at->format('F d, Y') }}</p>
+                                                </header>
+                                                <p>{{ $review->review }}</p>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade m-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="tab-pane" role="tabpanel" id="tab_02">
+
+
+
+
+
+                                    <form class="ps-product__review" action="{{ route('products.reviews.store', $product->id) }}" method="post">
+                                        @csrf
+                                            <div class="stars">
+
+                                                <div class="div-stars">
+
+                                                  <input class="star2 star-five" id="star-five" type="radio" value="5" name="rating"/>
+
+                                                  <label class="star2 star-five" for="star-five"></label>
+
+                                                  <input class="star2 star-fo" id="star-fo" type="radio" value="4" name="rating"/>
+
+                                                  <label class="star2 star-fo" for="star-fo"></label>
+
+                                                  <input class="star2 star-three" id="star-three" type="radio" value="3" name="rating"/>
+
+                                                  <label class="star2 star-three" for="star-three"></label>
+
+                                                  <input class="star2 star-tow" id="star-tow" type="radio" value="2" name="rating"/>
+
+                                                  <label class="star2 star-tow" for="star-tow"></label>
+
+                                                  <input class="star2 star-one" id="star-one" type="radio" value="1" name="rating"/>
+
+                                                  <label class="star2 star-one" for="star-one"></label>
+
+                                                </div>
+
+
+                                        </div>
+                                        <div class="form-group">
+                                        <h4>ADD YOUR REVIEW</h4>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6  ">
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 ">
+                                                <div class="form-group">
+                                                    <label>Your Review:</label>
+                                                    <textarea name="review" class="form-control" rows="6"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-black">Submit<i class="ps-icon-next"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade m-2" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="tab-pane" role="tabpanel" id="tab_03">
+                                    <p>Add your tag <span> *</span></p>
+                                    <form class="ps-product__tags" action="_action" method="post">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="">
+                                            <button class="ps-btn ps-btn--sm">Add Tags</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade m-2" id="addetinal" role="tabpanel" aria-labelledby="addetinal-tab">
+                                <div class="tab-pane" role="tabpanel" id="tab_04">
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="6" placeholder="Enter your addition here..."></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="ps-btn" type="button">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+
+
+
+
+{{--
+                     <div class="clearfix"></div>
                     <div class="ps-product__content mt-50">
                         <ul class="tab-list" role="tablist">
                             <li class="active"><a href="#tab_01" aria-controls="tab_01" role="tab" data-toggle="tab">Overview</a></li>
@@ -91,34 +316,126 @@
                             <p>{{ $product->description }}</p>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="tab_02">
-                            {{-- <p class="mb-20">{{ $product->reviews()->count() }} review for <strong>{{ $product->name }}</strong></p> --}}
-                            {{-- @foreach($product->reviews()->with('user')->latest()->get() as $review)
-                            <div class="ps-review">
-                                <div class="ps-review__thumbnail"><img src="images/user/1.jpg" alt=""></div>
-                                <div class="ps-review__content">
-                                    <header>
-                                        <x-rating-stars :rating="$review->rating" />
-                                        <p>By<a href=""> {{ $review->user->name }}</a> - {{ $review->created_at->format('F d, Y') }}</p>
-                                    </header>
-                                    <p>{{ $review->review }}</p>
-                                </div>
-                            </div>
-                            @endforeach --}}
+
+
+
+
+
+
+                            <style>
+
+                                .stars{
+                                    z-index: 999;
+                                }
+
+                                 .mt-200{
+                                     margin-top:200px;
+                                 }
+
+                                input.star2 {
+                                    display: none;
+
+
+                                }
+
+
+
+                                label.star2 {
+
+                                  float: right;
+
+                                  padding: 6px;
+                                  font-size: 27px;
+
+                                  color: #bbbbbb;
+
+                                  transition: all .2s;
+
+                                }
+
+
+
+                                input.star2:checked ~ label.star2:before {
+
+                                  content: '\f005';
+
+                                  color: #FD4;
+
+                                  transition: all .25s;
+
+                                }
+
+
+                                input.star-five:checked ~ label.star2:before {
+
+                                  color: #FE7;
+
+                                  text-shadow: 0 0 20px #952;
+
+                                }
+
+
+
+                                input.star-one:checked ~ label.star2:before { color: #F62; }
+
+
+
+                                label.star2:hover { transform: rotate(-15deg) scale(1.3); }
+
+
+
+                                label.star2:before {
+
+                                  content: '\f006';
+
+                                  font-family: FontAwesome;
+
+                                }
+                                  </s>
+
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"five
+
+
+
+
                             <form class="ps-product__review" action="{{ route('products.reviews.store', $product->id) }}" method="post">
                                 @csrf
-                                <h4>ADD YOUR REVIEW</h4>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                        <div class="form-group">
-                                            <label>Your rating<span></span></label>
-                                            <select class="ps-rating" name="rating">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
+
+                                    <div class="stars">
+
+                                        <div class="div-stars">
+
+                                          <input class="star2 star-five" id="star-five" type="radio" value="5" name="rating"/>
+
+                                          <label class="star2 star-five" for="star-five"></label>
+
+                                          <input class="star2 star-fo" id="star-fo" type="radio" value="4" name="rating"/>
+
+                                          <label class="star2 star-fo" for="star-fo"></label>
+
+                                          <input class="star2 star-three" id="star-three" type="radio" value="3" name="rating"/>
+
+                                          <label class="star2 star-three" for="star-three"></label>
+
+                                          <input class="star2 star-tow" id="star-tow" type="radio" value="2" name="rating"/>
+
+                                          <label class="star2 star-tow" for="star-tow"></label>
+
+                                          <input class="star2 star-one" id="star-one" type="radio" value="1" name="rating"/>
+
+                                          <label class="star2 star-one" for="star-one"></label>
+
                                         </div>
+
+
+                                </div>
+                                <div class="form-group">
+                                <h4>ADD YOUR REVIEW</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6  ">
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 ">
                                         <div class="form-group">
@@ -126,7 +443,7 @@
                                             <textarea name="review" class="form-control" rows="6"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="ps-btn ps-btn--sm">Submit<i class="ps-icon-next"></i></button>
+                                            <button type="submit" class="btn btn-black">Submit<i class="ps-icon-next"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -149,12 +466,12 @@
                                 <button class="ps-btn" type="button">Submit</button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
-    <div class="ps-section ps-section--top-sales ps-owl-root pt-40 pb-80">
+    {{-- <div class="ps-section ps-section--top-sales ps-owl-root pt-40 pb-80">
         <div class="ps-container">
             <div class="ps-section__header mb-50">
                 <div class="row">
@@ -303,5 +620,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </x-store-layout>

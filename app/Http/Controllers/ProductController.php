@@ -45,6 +45,8 @@ class ProductController extends Controller
 
     public function review(Request $request, Product $product)
     {
+        $request->rating = intval($request->rating);
+        // dd($request,$request->rating,$request->review);
         $request->validate([
             'rating' => ['required', 'int', 'min:1', 'max:5'],
             'review' => ['nullable', 'string'],
@@ -72,7 +74,7 @@ class ProductController extends Controller
             'total_reviews' => $result->total_reviews,
         ])->save();
 
-        return redirect()->to($product->url)
+        return redirect()->back()
             ->with('success', __('Product reviewd'));
     }
 
