@@ -9,11 +9,14 @@ use Illuminate\Support\Str;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
     use HasFactory;
     use softDeletes;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'name', 'slug', 'description', 'category_id', 'price', 'compare_price', 'cost',
@@ -59,7 +62,7 @@ class Product extends Model
     {
         return $this->morphMany(Review::class, 'reviewable');
     }
-    
+
     public static function availabilities()
     {
         return [
