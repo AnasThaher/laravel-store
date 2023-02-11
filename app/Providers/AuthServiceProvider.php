@@ -28,11 +28,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // Gates
-        Gate::before(function($user, $ability) {
-            if ($user->is_super_admin) {
-                return true;
-            }
-        });
+        // Gate::before(function($user, $ability) {
+        //     if ($user->is_super_admin) {
+        //         return true;
+        //     }
+        // });
 
         // foreach (config('permissions') as $key => $value) {
         //     Gate::define($key, function($user) use ($key) {
